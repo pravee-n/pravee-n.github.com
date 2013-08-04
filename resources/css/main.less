@@ -13,22 +13,66 @@ html, body {
 	margin: 0 auto;
 }
 
+/*@font-face {
+	font-family: 'EntypoRegular';
+	src: url('fonts/entypo/entypo.eot');
+	src: url('fonts/entypo/entypo.eot?#iefix') format('embedded-opentype'),
+		url('fonts/entypo/entypo.woff') format('woff'),
+		url('fonts/entypo/entypo.ttf') format('truetype'),
+		url('fonts/entypo/entypo.svg#EntypoRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+*/
+@font-face {
+	font-family: 'EntypoSocial';
+	src: url('fonts/entypo-social/entypo-social.eot');
+	src: url('fonts/entypo-social/entypo.eot?#iefix') format('embedded-opentype'),
+		url('fonts/entypo-social/entypo-social.woff') format('woff'),
+		url('fonts/entypo-social/entypo-social.ttf') format('truetype'),
+		url('fonts/entypo-social/entypo-social.svg#EntypoRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.entypo-social {
+	font-family: 'EntypoSocial';
+}
+
 .home-content {
-	/*background: yellow;*/
 	position: relative;
-	/*min*/
+	padding-top: 5px;
 	.info-container {
 		width: 400px;
-		margin: 80px auto 0 auto;
+		margin: 100px auto 0 auto;
 		.name {
+			color: #212121;
 			font-family: 'Raleway', sans-serif;
 			font-size: 6em;
 		}
 		.social-container {
 			overflow: hidden;
+			width:200px;
+			margin: 10px auto 0 auto;
 			.social-icon {
+				text-decoration: none;
+				color: #212121;
 				float: left;
+				margin-right: 20px;
+				font-size: 8em;
+				cursor: pointer;
+				&:hover {
+					color:#3c3c3c;
+				}
+			}
+			.social-icon-git {
+				margin: 16px 22px 0 0;
+				font-size: 4.5em;
 			}
 		}
 	}
 }
+
+/*.icon-fb:before {
+	content: 'U+F30D';
+}*/
