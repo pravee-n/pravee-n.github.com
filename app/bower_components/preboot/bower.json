@@ -1,0 +1,9 @@
+{
+  "name": "preboot",
+  "version": "0.0.0",
+  "commit": "6c75b81c37f3d0809a0baff4ad0907edcfd93493",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mdo/preboot.git"
+  }
+}

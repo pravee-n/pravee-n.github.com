@@ -1,0 +1,36 @@
+
+<div class="filter-item">
+    <div class="filter-item-status">
+        <i class="icon-ok"></i>
+    </div>
+    <div class="filter-item-label">
+        More Filters
+    </div>
+    <div class="filter-item-dropdown">
+        <i class="icon-plus"></i>
+    </div>
+    <div class="filter-item-list more-filter-dropdown">
+        <div class="more-filter-label-container">
+            {{#each data}}
+                <div class="more-filter-item-list">
+                    <div class="more-filter-item-inner">
+                        <div class="more-filter-item-name">{{this.name}}</div>
+                        <i class="icon-chevron-right"></i>
+                    </div>
+                    <div class="more-filter-item-options">
+                        {{#each subItems}}
+                            <div class="filter-item-list-item">
+                                <input type="checkbox" name="{{this}}" id="{{this}}" checked>
+                                <label for="{{this}}">{{this}}</label>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="more-filter-option-container">
+            <div class="more-filter-option-container-inner">
+            </div>
+        </div>
+    </div>
+</div>

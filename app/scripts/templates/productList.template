@@ -1,0 +1,22 @@
+{{#each products}}
+    <div class="search-product-item js-product-item">
+        <div class="search-product-item-inner">
+            <div class="product-info js-product-info">
+                <div class="product-image">
+                    <img src="{{picture}}" alt="{{name}} image">
+                </div>
+                <div class="product-name">{{name}}</div>
+                <div class="product-price"><i class="icon-inr"></i> {{price}}</div>
+                <div class="product-brand">{{brand}}</div>
+            </div>
+            <div class="product-expand js-product-expand-container">
+                <a href="/product.html">
+                    <div class="product-expand-inner">
+                        <div class="product-expand-message">View Product Details</div>
+                        <i class="icon-chevron-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{{/each}}

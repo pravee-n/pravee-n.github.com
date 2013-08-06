@@ -1,0 +1,79 @@
+.product-sc {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    .product-main-sc {
+        overflow: hidden;
+        position: fixed;
+        display: block;
+        width: 100%;
+        top: 42px;
+        left: 0;
+        height: 90%;
+    }
+    .product-store-sc {
+        float: left;
+        width: 20%;
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        box-shadow: 1px 2px 3px @black-70;
+        z-index: 99;
+        .product-store-inner {
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+
+        }
+    }
+}
+.product-info-main {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: @ivory;
+    .product-info-inner {
+        padding: 10px 5%;
+        overflow: hidden;
+        .product-info-left {
+            overflow: hidden;
+            position: relative;
+            float: left;
+            .product-name {
+                .beta;
+                overflow: hidden;
+                float: left;
+                font-weight: 100;
+            }
+            .product-sub {
+                .beta;
+                float: left;
+                color: @black-80;
+
+            }
+            .product-price {
+                .beta;
+                color: @brand-primary;
+                float: left;
+                .product-price-value {
+                    display: inline;
+                }
+            }
+        }
+        .product-info-right {
+            float: right;
+            overflow: hidden;
+            position: relative;
+            .product-more-details-container {
+                .delta;
+                .border-radius( 4px );
+                .flat-button;
+                float: left;
+                width: 100px;
+                background: @black-80;
+                color: white;
+            }
+        }
+    }
+}

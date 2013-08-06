@@ -1,0 +1,121 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title> EYS demo </title>
+        <meta name="description" content=" EYS demo application">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="styles/main.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+
+    </head>
+    <body>
+
+    <div class="lnd-header">
+        <div class="lnd-logo-container">
+            <i class="icon-rocket icon"></i>
+            <span class="item1">E</span>
+            <span class="item2">Y</span>
+            <span class="item3">S</span>
+        </div>
+        <div class="lnd-menu">
+            <li class="lnd-menu-item">
+                <a href="#">About</a>
+            </li>
+            <li class="lnd-menu-item">
+                <a href="#">Contact</a>
+            </li>
+            <li class="lnd-menu-item">
+                <a href="#"><i class="icon-facebook"></i></a>
+            </li>
+            <li class="lnd-menu-item">
+                <a href="#"><i class="icon-twitter"></i></a>
+            </li>
+
+        </div>
+    </div>
+
+    <div class="lnd-sc">
+        <div id="map-canvas"></div>
+    </div>
+
+    <div class="lnd-main-container">
+        <div class="lnd-main-container-inner">
+            <div class="lnd-main-text">
+                <span> Find where to buy your next product from </span>
+            </div>
+            <input type="text" class="lnd-main-input-container" placeholder="Enter the product you want to search for">
+            <div class="lnd-main-submit">
+                <a href="search.html"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="lnd-sub-text">
+            </div>
+        </div>
+    </div>
+
+    <div class="lnd-footer">
+        <div class="lnd-footer-inner">
+            <div class="lnd-footer-list">
+                <div class="lnd-footer-list-item">About Us</div>
+                <div class="lnd-footer-list-item">Contact</div>
+                <div class="lnd-footer-list-item">Terms and Conditions</div>
+                <div class="lnd-footer-list-item">Privacy Policy</div>
+                <div class="lnd-footer-list-item"></div>
+            </div>
+            <div class="lnd-footer-sub-list">
+                <div class="lnd-footer-list-item">
+                    <i class="icon-twitter"></i>
+                </div>
+                <div class="lnd-footer-list-item">
+                    <i class="icon-facebook"></i>
+                </div>
+                <div class="lnd-footer-list-item">
+                    <span class="credits">© 2012-13 EYS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+      <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABgtYpOQt-iiqyErJMaJ5huCVMK12JQHk&libraries=drawing&sensor=false">
+      </script>
+
+        <!-- build:js scripts/libraries.js -->
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="scripts/jquery.icheck.js"></script>
+        <script src="scripts/markerclusterer.js"></script>
+        <script src="scripts/fontawesome-markers.js"></script>
+        <!-- // <script src="scripts/bows.js"></script> -->
+        <!-- endbuild -->
+
+        <!-- build:js scripts/base.js -->
+        <script src="scripts/data.js"></script>
+        <script src="scripts/filters.js"></script>
+        <script src="scripts/products.js"></script>
+        <script src="scripts/modules.js"></script>
+        <script src="scripts/fillMap.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js scripts/index.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+
+    </body>
+</html>
+
+
+

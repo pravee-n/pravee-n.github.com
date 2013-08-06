@@ -1,0 +1,19 @@
+<div class="filter-item">
+    <div class="filter-item-status">
+        <i class="icon-ok"></i>
+    </div>
+    <div class="filter-item-label">
+        {{name}}
+    </div>
+    <div class="filter-item-dropdown">
+        <i class="icon-chevron-down"></i>
+    </div>
+    <div class="filter-item-list">
+        {{#each subItems}}
+        <div class="filter-item-list-item">
+            <input type="checkbox" name="{{this}}" id="{{this}}" checked>
+            <label for="{{this}}">{{this}}</label>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,361 @@
+a {
+    color: @link-color;
+    text-decoration: none;
+    &:hover {
+        color: @link-color-hover;
+        text-decoration: none;
+    }
+}
+
+
+.map-control-bar {
+    width: 20%;
+    position: absolute;
+    left: 20px;
+    top : 20px;
+    overflow: hidden;
+    background: @brand-info;
+    background: #ffb600;
+    opacity: 0.85;
+    z-index: 10;
+    border-radius: 4px;
+    // box-shadow: 1px 2px 3px @black-70;
+    .map-control-bar-button {
+        .delta;
+        margin : 0;
+        float: left;
+        padding: 10px 1%;
+        border-right: 1px solid darken( @brand-secondary, 10% );
+        width: 30.5%;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        &:hover {
+            background: darken( @brand-secondary, 20% );
+        }
+        &.map-control-shortlist {
+            border-right: none;
+            i {
+                opacity: 0.5;
+                padding-right: 5px;
+            }
+            .shortlist-value {
+                display: inline;
+            }
+        }
+    }
+}
+
+
+.search-map-sc {
+    float: left;
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+
+
+    #map-canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+}
+
+
+
+.search-info-sc {
+    .border-bottom-radius( 4px );
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40%;
+    overflow: hidden;
+    z-index: 10;
+    border-top: 2px solid darken( @brand-primary, 20% );
+    display: none;
+    .search-info-inner {
+        overflow: hidden;
+        position: relative;
+        .search-info-top-bar {
+            .delta;
+            width: 100%;
+            position: relative;
+            float: left;
+            background: darken( @brand-primary, 20% );
+            background: white;
+            color: @black-80;
+            padding: 10px;
+            box-shadow: 1px 2px 3px @black-60;
+            margin: 0;
+            .search-info-store-title {
+                margin-bottom: 0;
+                width: 45%;
+                float: left;
+                position: relative;
+            }
+            .search-info-store-status {
+                width: 10%;
+                float: left;
+                padding: 0 2.2%;
+                margin: 0 2.2%;
+                text-align: center;
+                position: relative;
+                color: @brand-success;
+                border-left: 1px solid @black-20;
+                border-right: 1px solid @black-20;
+            }
+            .search-info-price {
+                width: 20%;
+                float: left;
+                position: relative;
+                text-align: center;
+                i {
+                    padding-right: 10px;
+                    opacity: 0.5;
+                }
+            }
+            .search-info-close {
+                width: 14.5%;
+                float: left;
+                position: relative;
+                text-align: center;
+                border-left: 1px solid @black-20;
+                color: @brand-primary;
+                cursor: pointer;
+                &:hover {
+                    i {
+                        opacity: 1;
+                    }
+                }
+                i {
+                    padding-right: 10px;
+                    opacity: 0.5;
+                }
+            }
+
+        }
+        .search-info-bottom-bar {
+            .delta;
+            margin: 0;
+            width: 100%;
+            float: left;
+            overflow: hidden;
+            clear: both;
+            background: darken( @brand-primary, 20% );
+            background: @brand-primary;
+            color: @ivory;
+            .search-info-rating {
+                width: 23%;
+                position: relative;
+                float: left;
+                padding: 10px 1%;
+                border-right: 1px solid darken( @brand-primary, 20% );
+                text-align: center;
+                // color: lighten( @brand-primary, 0% );
+                // color: @black-80;
+            }
+            .search-info-shortlist {
+                width: 8%;
+                float: left;
+                padding: 10px 1% 10px 1%;
+                border-right: 1px solid darken( @brand-primary, 20% );
+                text-align: center;
+                &:hover {
+                    background: @black-70;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+            .search-info-distance {
+                width: 27%;
+                float: left;
+                padding: 10px 1%;
+                border-right: 1px solid darken( @brand-primary, 20% );
+                text-align: center;
+                i {
+                    opacity: 0.5;
+                    padding-right: 5px;
+                }
+                .distance-value {
+                    display: inline;
+                }
+            }
+            .search-info-expand {
+                width: 33%;
+                float: left;
+                padding: 10px 1%;
+                text-align: center;
+                &:hover {
+                    background: @black-70;
+                    color: white;
+                    cursor: pointer;
+                }
+                i {
+                    opacity: 0.5;
+                    padding-left: 5px;
+                }
+                .expand-value {
+                    display: inline;
+                }
+            }
+
+        }
+        .search-info-expand-sc {
+            display: none;
+            position: relative;
+            overflow: hidden;
+            background: @ivory;
+            .border-bottom-radius( 4px );
+            border: 1px solid @black-20;
+            border-top: none;
+            max-height: 300px;
+            .search-info-expand-inner {
+                .delta;
+                margin: 0;
+                overflow: hidden;
+                position: relative;
+                padding: 10px;
+
+                .search-info-expand-top {
+                    overflow: hidden;
+                    position: relative;
+                    .search-info-expand-image {
+                        margin: 0 auto;
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        display: block;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: inline;
+                        }
+                    }
+                    .search-info-expand-name {
+                        display: block;
+                        text-align: center;
+                        font-weight: 400;
+                    }
+                    .search-info-expand-address {
+                        display: block;
+                        text-align: center;
+                        margin-top: 10px;
+                    }
+                    .search-info-expand-phone {
+                        display: block;
+                        text-align: center;
+                        margin-top: 10px;
+                        i {
+                            opacity: 0.5;
+                        }
+                        .search-info-phone-value {
+                            display: inline;
+                        }
+                    }
+                }
+                .search-info-expand-other-info {
+                    overflow: hidden;
+                    position: relative;
+                    margin-top: 10px;
+                    .search-info-directions-button {
+                        .flat-button;
+                        background: @brand-primary;
+                        width: 100px;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.flat-button {
+    .border-radius(2px);
+    .transition( all 0.5s ease-in-out );
+    background: @black-70;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+        background: darken( @black-70, 20% );
+    }
+}
+
+.lnd-header {
+    position: relative;
+    height: 8%;
+    padding: 2%;
+    width: 96%;
+    margin: 0;
+    overflow: hidden;
+    .lnd-logo-container {
+        .beta;
+        .sans;
+        float: left;
+        margin-bottom: 0;
+        span {
+            color: @black-80;
+        }
+        .icon {
+            float: left;
+            .border-radius(50%);
+            background: @brand-primary;
+            color: white;
+            margin-top: -5px;
+            margin-right: 10px;
+            padding: 10px;
+            display: block;
+            overflow: hidden;
+        }
+    }
+    .lnd-menu {
+        .delta;
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+        float: right;
+        list-style: none;
+        margin-top: 10px;
+        .lnd-menu-item {
+            display: inline;
+            padding-right: 20px;
+        }
+
+    }
+}
+
+
+.lnd-footer {
+    position: fixed;
+    top: 90%;
+    left: 0;
+    padding: 2%;
+    width: 96%;
+    overflow: hidden;
+    .lnd-footer-inner {
+        .delta;
+        list-style: none;
+        color: @black-70;
+        .lnd-footer-list-item {
+            display: inline;
+            padding-right: 20px;
+        }
+
+        .lnd-footer-list {
+            float: left;
+        }
+        .lnd-footer-sub-list {
+            float: right;
+            display: block;
+            position: relative;
+            .credits {
+                .opacity( 0.5 );
+            }
+        }
+    }
+}

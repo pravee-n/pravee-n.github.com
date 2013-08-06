@@ -1,0 +1,300 @@
+.search-header {
+    width: 96%;
+    padding: 10px 2%;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    .lnd-logo-container {
+        .delta;
+        .sans;
+        float: left;
+        margin-bottom: 0;
+        span {
+            color: @black-80;
+        }
+        .icon {
+            float: left;
+            .border-radius( 50% );
+            background: @brand-primary;
+            color: white;
+            padding: 5px;
+            margin-top: -3px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.search-sc {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    .search-filter-sc {
+        width: 100%;
+        background: @ivory;
+        position: relative;
+        border-top: 1px solid @black-20;
+        border-bottom: 1px solid @black-20;
+        // box-shadow: 1px 2px 3px @black-80;
+        z-index: 10;
+        .search-filter-inner {
+            position: relative;
+            padding: 0 5px;
+            .search-filter-main {
+                position: relative;
+                overflow: visible;
+                .search-filter-input-container {
+                    .delta;
+                    padding: 5px 0;
+                    float: left;
+                    width: 29%;
+                    margin: 0;
+                    overflow: hidden;
+                    position: relative;
+                    border-right: 1px solid @black-20;
+                    .icon {
+                        color: @brand-primary;
+                        padding-right: 5px;
+                        position: absolute;
+                        right: 4%;
+                        top: 30%;
+                    }
+                    .main-search-input {
+                        line-height: 1.8em;
+                        border-radius: 2px;
+                        box-shadow: none;
+                        border: 1px solid @black-20;
+                        width: 96%;
+                        height: 100%;
+                        margin: 0;
+                    }
+                }
+                .search-filter-collapse {
+                    float: left;
+                    clear: both;
+                    display: block;
+                    position: relative;
+                    overflow: hidden;
+                }
+                .search-filter-item-sc {
+                    position: relative;
+                    float: left;
+                    width: 70%;
+                    display: none;
+                    .filter-item {
+                        .delta;
+                        width: 20%;
+                        margin: 0;
+                        padding: 11px 2.2%;
+                        float: left;
+                        border-right: 1px solid @black-20;
+                        position: relative;
+                        cursor: pointer;
+                        &.selected {
+                            background: white;
+                        }
+                        .filter-item-status {
+                            color: @brand-success;
+                            display: none;
+                            float: left;
+                        }
+                        .filter-item-label {
+                            float: left;
+                            color: @black-70;
+                            text-align: left;
+                            padding-left: 5px;
+                        }
+                        .filter-item-dropdown {
+                            float: right;
+                            color: @black-20;
+                        }
+                        .filter-item-list {
+                            display: none;
+                            width: 96%;
+                            left: -1px;
+                            position: absolute;
+                            top: 41px;
+                            background: white;
+                            padding: 10px 2.5%;
+                            overflow: hidden;
+                            border-bottom-right-radius: 2px;
+                            border-bottom-left-radius: 2px;
+                            border: 1px solid @black-20;
+                            border-top: none;
+                            .filter-item-list-item {
+                                float: left;
+                                overflow: hidden;
+                                padding: 10px 0;
+                                width: 100%;
+                                border-bottom: 1px dotted @black-20;
+                                .icheckbox_flat-red {
+                                    float: left;
+                                    margin-right: 10px;
+                                }
+                                label {
+                                    cursor: pointer;
+                                }
+                            }
+                            &.more-filter-dropdown {
+                                width: 397%;
+                                left: -301.9%;
+                                overflow: hidden;
+                            }
+                            .more-filter-label-container {
+                                width: 60%;
+                                overflow: hidden;
+                                float: left;
+                                .more-filter-item-list {
+                                    width: 45%;
+                                    margin: 10px 2.5%;
+                                    float: left;
+                                    background: @ivory;
+                                    &.selected {
+                                        background: @brand-primary;
+                                        color: white;
+                                    }
+                                    .more-filter-item-inner {
+                                        padding: 10px;
+                                        position: relative;
+                                        overflow: hidden;
+                                        .more-filter-item-name {
+                                            float: left;
+                                        }
+                                        i {
+                                            float: right;
+                                            color: @black-20;
+                                        }
+                                    }
+                                    .more-filter-item-options {
+                                        display: none;
+                                        overflow: hidden;
+                                        float: left;
+                                    }
+                                }
+
+                            }
+                            .more-filter-option-container {
+                                overflow: hidden;
+                                position: relative;
+                                float: left;
+                                width: 40%;
+                                height: 100%;
+                                .more-filter-option-container-inner {
+                                    padding: 0 10px;
+                                    border-left: 1px solid @black-20;
+                                    overflow: hidden;
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .search-main-sc {
+        overflow: hidden;
+        position: fixed;
+        display: block;
+        width: 100%;
+        top: 84px;
+        left: 0;
+        height: 80%;
+        .search-product-sc {
+            float: left;
+            width: 20%;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            box-shadow: 1px 2px 3px @black-70;
+            z-index: 99;
+            .search-product-inner {
+                overflow: hidden;
+                position: relative;
+                height: 100%;
+                .search-product-item {
+                    overflow: hidden;
+                    float: left;
+                    width: 100%;
+                    position: relative;
+                    .search-product-item-inner {
+                        overflow: hidden;
+                        border-bottom: 1px solid @black-20;
+                        padding: 10px 0 0 0;
+                        .product-info {
+                            position: relative;
+                            display: block;
+                            overflow: hidden;
+                            padding: 0 5px;
+                            box-shadow: 1px 2px 3px @black-60;
+                            z-index: 10;
+                            cursor: pointer;
+                            .product-image {
+                                width: 20%;
+                                float: left;
+                                vertical-align: middle;
+                                text-align: center;
+                                overflow: hidden;
+                                img {
+                                    width: 100%;
+                                    display: inline;
+                                }
+                            }
+                            .product-name {
+                                .delta;
+                                font-weight: 400;
+                                margin: 0 2.5%;
+                                float: left;
+                                width: 45%;
+                            }
+                            .product-price {
+                                .delta;
+                                color: @brand-primary;
+                                width: 30%;
+                                float: left;
+                                margin: 0;
+                            }
+                            .product-brand {
+                                float: left;
+                                width: 75%;
+                                margin: 10px 2.5%;
+                            }
+                        }
+                        .product-expand {
+                            display: block;
+                            width: 100%;
+                            overflow: hidden;
+                            text-align: center;
+                            display: none;
+                            color: @black-70;
+                            &:hover {
+                                .transition( 0.5s all ease-in-out );
+                                color: @brand-primary;
+                                cursor: pointer;
+                            }
+                            .product-expand-inner {
+                                padding: 10px 0;
+                                background: @offWhite;
+                                position: relative;
+                                overflow: hidden;
+                                display: block;
+                            }
+                            .product-expand-message {
+                                .border-radius( 4px );
+                                .delta;
+                                margin: 0 auto;
+                                width: 60%;
+                                padding: 5px;
+                                display: inline;
+                            }
+                        }
+                    }
+                }
+                .search-store-item {
+                    .search-product-item;
+                }
+            }
+        }
+    }
+}

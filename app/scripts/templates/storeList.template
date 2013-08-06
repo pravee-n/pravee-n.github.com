@@ -1,0 +1,13 @@
+{{#each stores}}
+    <div class="search-product-item js-product-item">
+        <div class="search-product-item-inner">
+            <div class="product-info js-product-info">
+                <div class="product-image">
+                    <img src="{{picture}}" alt="{{name}} image">
+                </div>
+                <div class="product-name">{{name}}</div>
+                <div class="product-price"><i class="icon-inr"></i> 23,500</div>
+            </div>
+        </div>
+    </div>
+{{/each}}

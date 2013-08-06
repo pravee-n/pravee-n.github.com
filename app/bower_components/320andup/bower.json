@@ -1,0 +1,9 @@
+{
+  "name": "320andup",
+  "version": "0.0.0",
+  "commit": "3785b42274aa26bf11dbf780f9ab1570ac258a44",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/malarkey/320andup.git"
+  }
+}
