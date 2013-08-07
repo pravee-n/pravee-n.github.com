@@ -1,16 +1,27 @@
 var google = google || {};
 
+/**
+ * Main controller responsible for handling all the actions related
+ * to the SEARCH VIEW
+ */
 var searchController = ( function(){
 
     var fillMapController, mapInstance, currentData, productHandler;
 
     var log = bows( 'searchContoller' );
 
+    /**
+     * Contains all DOM references to be used by this module.
+     * @type {Object}
+     */
     var messages = {
         mapLoad : 'Map Loaded'
     };
 
-    // DEFINING THE SETTINGS VARIABLE
+    /**
+     * Contains all the settings for this module
+     * @type {Object}
+     */
     var settings = {
         mapStyle : [{
             featureType: 'all',
@@ -49,17 +60,28 @@ var searchController = ( function(){
         getData();
     }
 
+
+    /**
+     * Render various elements on the map
+     * @param  {Object} data Data containing the pointers
+     */
     function renderMap( data ) {
         log( data );
         fillMapController = new FillMap( mapInstance, data );
     }
 
-
+    /**
+     * Get all the data required by this module. Preloading data for a better experience
+     * for the user.
+     */
     function getData() {
         mainData.getStores( renderMap );
         mainData.getProducts( initializeProductHandler );
     }
 
+    /**
+     * Get the filers for the current search
+     */
     function getFilters() {
         var filterHandler = new YFilter( settings.filterDataUrl );
         $( 'body' ).bind( 'YFilterReady', function() {
@@ -79,10 +101,16 @@ var searchController = ( function(){
                 $( '.more-filter-option-container-inner' ).html( html );
             });
 
-            $( '.filter-item' ).on( 'click', function() {
+            $( '.filter-item' ).on( 'mouseenter', function() {
                 $( '.filter-item' ).not(this).removeClass( 'selected' ).find( '.filter-item-list' ).slideUp( 'fast' );
-                $( this ).toggleClass( 'selected' );
-                $( this ).find( '.filter-item-list' ).slideToggle( 'fast' );
+                $( this ).addClass( 'selected' );
+                $( this ).find( '.filter-item-list' ).slideDown( 'fast' );
+            });
+
+            $( '.filter-item' ).on( 'mouseleave', function() {
+                $( '.filter-item' ).not(this).removeClass( 'selected' ).find( '.filter-item-list' ).slideUp( 'fast' );
+                $( this ).removeClass( 'selected' );
+                $( this ).find( '.filter-item-list' ).slideUp( 'fast' );
             });
 
             $( '.filter-item-list' ).on( 'click', function( event ) {
@@ -97,6 +125,11 @@ var searchController = ( function(){
         });
     }
 
+    /**
+     * Initialize the product handler module. This would be responsible for rendering the
+     * product list on the left.
+     * @param  {Object} data Contains the list of products
+     */
     function initializeProductHandler( data ) {
         productHandler = new YProducts();
         var renderData = {};
@@ -104,10 +137,13 @@ var searchController = ( function(){
         productHandler.getHtml( renderData, renderProducts );
     }
 
+    /**
+     * Render the product list.
+     * @param  {String} html contains the html of all the product item blocks.
+     */
     function renderProducts( html ) {
         $( '.search-product-inner' ).html( html );
         productHandler.activate();
-
     }
 
     /**

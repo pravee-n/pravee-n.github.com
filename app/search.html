@@ -22,13 +22,44 @@
     </head>
     <body>
 
-    <div class="search-header">
+    <div class="search-header lnd-header">
         <div class="lnd-logo-container">
             <i class="icon-rocket icon"></i>
             <span class="item1">E</span>
             <span class="item2">Y</span>
             <span class="item3">S</span>
         </div>
+        <div class="main-search-container js-global-search-container">
+            <div class="search-input">
+                <input type="text" class="main-search-input js-main-search-input" value="Dummy search text">
+            </div>
+            <div class="search-location-sc js-location-container">
+                <div class="search-location-label js-location-label"></div>
+                <i class="icon-caret-down icon js-search-location-icon-main"></i>
+                <i class="icon-spinner icon-spin icon js-search-location-icon-loading"></i>
+                <div class="search-location-dropdown js-location-dropdown">
+                    <div class="search-location-dropdown-auto js-location-autodetect">
+                        <i class="icon icon-screenshot"></i>
+                        <div class="auto-text">
+                            Detect location
+                        </div>
+                    </div>
+
+                    <div class="search-location-dropdown-input">
+                        <input type="text" placeholder="enter your location" class="js-search-location">
+                    </div>
+                    <div class="search-location-dropdown-update-button js-update-location-button">
+                        UPDATE LOCATION
+                    </div>
+                </div>
+            </div>
+            <div class="search-input-icon">
+                <i class="icon-search icon"></i>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+            <div class="clearfix"></div>
     </div>
 
 
@@ -36,9 +67,8 @@
         <div class="search-filter-sc">
             <div class="search-filter-inner">
                 <div class="search-filter-main">
-                    <div class="search-filter-input-container">
-                        <i class="icon-search icon"></i>
-                        <input type="text" class="main-search-input js-search-input-main">
+                    <div class="search-filter-label">
+                        <span>REFINE SEARCH BY</span>
                     </div>
                     <div class="search-filter-item-sc">
                     </div>
@@ -111,6 +141,8 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
         <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/bootstrap/js/bootstrap-tooltip.js"></script>
+        <script src="bower_components/bootstrap/js/bootstrap-popover.js"></script>
         <script src="scripts/jquery.icheck.js"></script>
         <script src="scripts/markerclusterer.js"></script>
         <script src="scripts/fontawesome-markers.js"></script>

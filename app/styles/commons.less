@@ -1,3 +1,6 @@
+// -------------------------------------
+// BASIC ELEMENTS CSS STARTS
+// -------------------------------------
 a {
     color: @link-color;
     text-decoration: none;
@@ -6,8 +9,149 @@ a {
         text-decoration: none;
     }
 }
+// -------------------------------------
+// BASIC ELEMENTS CSS ENDS
+// -------------------------------------
 
 
+// -------------------------------------
+// POPOVER CSS STARTS - taken from Bootstrap
+// -------------------------------------
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: none;
+  max-width: 276px;
+  padding: 1px;
+  text-align: left; // Reset given new insertion method
+  background-color: @popoverBackground;
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.2);
+  .border-radius(6px);
+  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+
+  // Overrides for proper insertion
+  white-space: normal;
+
+  // Offset the popover to account for the popover arrow
+  &.top     { margin-top: -10px; }
+  &.right   { margin-left: 10px; }
+  &.bottom  { margin-top: 10px; }
+  &.left    { margin-left: -10px; }
+}
+
+.popover-title {
+  margin: 0; // reset heading margin
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: @popoverTitleBackground;
+  border-bottom: 1px solid darken(@popoverTitleBackground, 5%);
+  .border-radius(5px 5px 0 0);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.popover-content {
+  padding: 9px 14px;
+}
+
+// Arrows
+//
+// .arrow is outer, .arrow:after is inner
+
+.popover .arrow,
+.popover .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.popover .arrow {
+  border-width: @popoverArrowOuterWidth;
+}
+.popover .arrow:after {
+  border-width: @popoverArrowWidth;
+  content: "";
+}
+
+.popover {
+  &.top .arrow {
+    left: 50%;
+    margin-left: -@popoverArrowOuterWidth;
+    border-bottom-width: 0;
+    border-top-color: #999; // IE8 fallback
+    border-top-color: @popoverArrowOuterColor;
+    bottom: -@popoverArrowOuterWidth;
+    &:after {
+      bottom: 1px;
+      margin-left: -@popoverArrowWidth;
+      border-bottom-width: 0;
+      border-top-color: @popoverArrowColor;
+    }
+  }
+  &.right .arrow {
+    top: 50%;
+    left: -@popoverArrowOuterWidth;
+    margin-top: -@popoverArrowOuterWidth;
+    border-left-width: 0;
+    border-right-color: #999; // IE8 fallback
+    border-right-color: @popoverArrowOuterColor;
+    &:after {
+      left: 1px;
+      bottom: -@popoverArrowWidth;
+      border-left-width: 0;
+      border-right-color: @popoverArrowColor;
+    }
+  }
+  &.bottom .arrow {
+    left: 50%;
+    margin-left: -@popoverArrowOuterWidth;
+    border-top-width: 0;
+    border-bottom-color: #999; // IE8 fallback
+    border-bottom-color: @popoverArrowOuterColor;
+    top: -@popoverArrowOuterWidth;
+    &:after {
+      top: 1px;
+      margin-left: -@popoverArrowWidth;
+      border-top-width: 0;
+      border-bottom-color: @popoverArrowColor;
+    }
+  }
+
+  &.left .arrow {
+    top: 50%;
+    right: -@popoverArrowOuterWidth;
+    margin-top: -@popoverArrowOuterWidth;
+    border-right-width: 0;
+    border-left-color: #999; // IE8 fallback
+    border-left-color: @popoverArrowOuterColor;
+    &:after {
+      right: 1px;
+      border-right-width: 0;
+      border-left-color: @popoverArrowColor;
+      bottom: -@popoverArrowWidth;
+    }
+  }
+}
+// -------------------------------------
+// POPOVER CSS ENDS
+// -------------------------------------
+
+// -------------------------------------
+// MAP CONTROL BAR CSS STARTS
+// -------------------------------------
 .map-control-bar {
     width: 20%;
     position: absolute;
@@ -45,16 +189,19 @@ a {
         }
     }
 }
+// -------------------------------------
+// MAP CONTROL BAR CSS ENDS
+// -------------------------------------
 
-
+// -------------------------------------
+// MAP CONTAINER CSS STARTS
+// -------------------------------------
 .search-map-sc {
     float: left;
     width: 80%;
     overflow: hidden;
     position: relative;
     height: 100%;
-
-
     #map-canvas {
         position: absolute;
         width: 100%;
@@ -62,9 +209,14 @@ a {
         overflow: hidden;
     }
 }
+// -------------------------------------
+// MAP CONTAINER CSS ENDS
+// -------------------------------------
 
 
-
+// -------------------------------------
+// INFO BOX CSS STARTS
+// -------------------------------------
 .search-info-sc {
     .border-bottom-radius( 4px );
     position: absolute;
@@ -271,8 +423,14 @@ a {
         }
     }
 }
+// -------------------------------------
+// INFO BOX CSS ENDS
+// -------------------------------------
 
 
+// -------------------------------------
+// BUTTON CSS STARTS
+// -------------------------------------
 .flat-button {
     .border-radius(2px);
     .transition( all 0.5s ease-in-out );
@@ -285,19 +443,27 @@ a {
         background: darken( @black-70, 20% );
     }
 }
+// -------------------------------------
+// BUTTON CSS ENDS
+// -------------------------------------
 
+
+// -------------------------------------
+// HEADER CSS STARTS
+// -------------------------------------
 .lnd-header {
     position: relative;
     height: 8%;
     padding: 2%;
     width: 96%;
     margin: 0;
-    overflow: hidden;
+    // overflow: hidden;
     .lnd-logo-container {
         .beta;
         .sans;
         float: left;
         margin-bottom: 0;
+        width: 10%;
         span {
             color: @black-80;
         }
@@ -325,10 +491,151 @@ a {
             display: inline;
             padding-right: 20px;
         }
+    }
+
+    .main-search-container {
+        // overflow: hidden;
+        float: right;
+        width: 60%;
+        position: relative;
+        border-radius: 4px;
+        border: 1px solid @black-20;
+        padding: 5px 0;
+        .search-input {
+            float: left;
+            position: relative;
+            width: 60%;
+            .main-search-input {
+                .epsilon;
+                box-shadow: none;
+                border: none;
+                width: 92%;
+                height: 100%;
+                margin: 0;
+                padding: 0 4%;
+                color: @black-40;
+                &:active {
+                    outline: none;
+                    border: none;
+                    box-shadow: none;
+                    color: @brand-primary;
+                }
+                &:focus {
+                    outline: none;
+                    border: none;
+                    box-shadow: none;
+                    color: @brand-primary;
+                }
+            }
+        }
+        .search-input-icon {
+            .delta;
+            margin: -2px 0 0 0;
+            display: block;
+            float: left;
+            position: relative;
+            width: 8%;
+            text-align: right;
+            padding-right: 2%;
+            color: @brand-primary;
+            cursor: pointer;
+        }
+        .search-location-sc {
+            .epsilon;
+            margin-bottom: 0;
+            position: relative;
+            width: 30%;
+            float: left;
+            cursor: pointer;
+            min-height: 1px;
+            .search-location-label {
+                display: block;
+                float: left;
+                width: 90%;
+                position: relative;
+                text-align: right;
+            }
+            .icon {
+                .delta;
+                margin: 0;
+                display: block;
+                float: right;
+                width: 10%;
+                text-align: center;
+                display: none;
+                &.icon-spinner {
+                    color: @brand-primary;
+                }
+            }
+            .search-location-dropdown {
+                display: none;
+            }
+        }
+        .popover {
+            display: block;
+            width: 100%;
+            .search-location-dropdown-input {
+                width: 100%;
+                display: block;
+                input {
+                    .epsilon;
+                    box-shadow: none;
+                    border: 1px solid @black-20;
+                    border-radius: 4px;
+                    width: 92%;
+                    height: 1.6em;
+                    margin: 0;
+                    padding: 5px 4%;
+                    color: @black-40;
+                    &:active {
+                        outline: none;
+                        box-shadow: none;
+                        color: @brand-primary;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                        color: @brand-primary;
+                    }
+                }
+            }
+            .search-location-dropdown-update-button {
+                .epsilon;
+                .flat-button;
+                background: @black-60;
+                padding: 5px 10px;
+                width: 70%;
+                margin: 10px auto;
+                &:hover{
+                    background: @black-80;
+                }
+            }
+            .search-location-dropdown-auto {
+                width: 100%;
+                margin: 10px 0;
+                color: @black-30;
+                text-align: center;
+                cursor: pointer;
+                &:hover {
+                    color: @black-80;
+                }
+                .auto-text {
+                    display: inline;
+                    padding-left: 10px;
+                }
+            }
+        }
 
     }
 }
+// -------------------------------------
+// HEADER CSS ENDS
+// -------------------------------------
 
+
+// -------------------------------------
+// FOOTER CSS STARTS
+// -------------------------------------
 
 .lnd-footer {
     position: fixed;
@@ -359,3 +666,6 @@ a {
         }
     }
 }
+// -------------------------------------
+// FOOTER CSS ENDS
+// -------------------------------------

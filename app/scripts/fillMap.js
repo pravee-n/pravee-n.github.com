@@ -1,8 +1,13 @@
 var FillMap = function( map, data ) {
 
-    var mapInstance, rawData, currentData, currentStores, infoBoxHandler, currentZoom, defaultCluster, currentCluster;
+    // Declaring all the variables to be used by this module.
+    var mapInstance, rawData, currentData, currentStores, infoBoxHandler, currentZoom, defaultCluster, currentCluster, currentCircle;
     var log = bows( 'fillMap' );
 
+    /**
+     * Logging messages for this module
+     * @type {Object}
+     */
     var messages = {
         initialized      : 'New Fill Map instance initialized',
         noMap            : 'Map instance not provided',
@@ -13,6 +18,10 @@ var FillMap = function( map, data ) {
         showStoreInfo    : 'show store info handler called'
     };
 
+    /**
+     * Contains all DOM references to be used by this module.
+     * @type {Object}
+     */
     var mapDom = {
         map : {
             mapContainer : '.js-map-container',
@@ -24,9 +33,25 @@ var FillMap = function( map, data ) {
             zoomOut   : '.js-control-bar-zoomOut',
             filter    : '.js-control-bar-filter',
             shortlist : '.js-control-bar-shortlist'
+        },
+        globalSearch : {
+            locationDropdown    : '.js-location-dropdown',
+            container           : '.js-global-search-container',
+            searchInput         : '.js-main-search-input',
+            locationLabel       : '.js-location-label',
+            locationContainer   : '.js-location-container',
+            locationAuto        : '.js-location-autodetect',
+            locationUpdate      : '.js-update-location-button',
+            locationInput       : '.js-search-location',
+            locationIconMain    : '.js-search-location-icon-main',
+            locationIconLoading : '.js-search-location-icon-loading'
         }
     };
 
+    /**
+     * Colors of the markers - 4 colors for statu
+     * @type {Object}
+     */
     var statusColors = {
         available : {
             color  : '#5cb85c'
@@ -45,6 +70,7 @@ var FillMap = function( map, data ) {
      */
     function initializeMapMenu() {
         $( mapDom.mapMenu.zoomIn ).on( 'click', function() {
+            // TODO : Need to add this to messages
             log( 'zoom called' );
             currentZoom = mapInstance.getZoom();
             mapInstance.setZoom( currentZoom + 1 );
@@ -52,6 +78,7 @@ var FillMap = function( map, data ) {
         });
 
         $( mapDom.mapMenu.zoomOut ).on( 'click', function() {
+            // TODO : Need to add this to messages
             log( 'zoom out called' );
             currentZoom = mapInstance.getZoom();
             mapInstance.setZoom( currentZoom - 1 );
@@ -63,6 +90,9 @@ var FillMap = function( map, data ) {
         });
     }
 
+    /**
+     * Fetch and show shortlisted items
+     */
     function showShortlist() {
         defaultCluster.clearMarkers();
         var shorlistedMarkers = YShortlist.getList();
@@ -84,16 +114,8 @@ var FillMap = function( map, data ) {
         } );
         defaultCluster= markerCluster;
         currentUserPosition = defaultCluster;
-        getUserLocation();
+        geolocationHandler.detectLocation( generateDistanceCircle );
     }
-
-    /**
-     * get current user location and call the generate circle function
-     */
-    function getUserLocation() {
-        navigator.geolocation.getCurrentPosition( generateDistanceCircle );
-    }
-
 
     /**
      * generate draggable circle for user.
@@ -101,12 +123,10 @@ var FillMap = function( map, data ) {
      */
     function generateDistanceCircle ( userLocation ) {
 
-        mapInstance.panTo( new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude ) );
-        mapInstance.setZoom( 12 );
-
+        var location = new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude );
         var marker = new google.maps.Marker({
             map       : mapInstance,
-            position  : new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude ),
+            position  : location,
             draggable : true,
             title     : 'Drag me!',
             icon      : {
@@ -124,7 +144,7 @@ var FillMap = function( map, data ) {
         EYS.currentUserPosition = marker;
 
 
-        var circle = new google.maps.Circle({
+        currentCircle = new google.maps.Circle({
             map          : mapInstance,
             radius       : 10000,
             fillColor    : '#666666',
@@ -134,10 +154,55 @@ var FillMap = function( map, data ) {
             suppressUndo : true
         });
 
-        circle.setEditable( true );
-        circle.bindTo( 'center', marker, 'position' );
+        google.maps.event.addListener(currentCircle, 'center_changed', function(){
+            var updatedCenter = currentCircle.getCenter();
+            updatePosition( updatedCenter );
+        });
+
+        google.maps.event.addListener(currentCircle, 'radius_changed', function(){
+            var circleBounds = currentCircle.getBounds();
+            map.fitBounds( circleBounds );
+        });
+
+
+        currentCircle.setEditable( true );
+        currentCircle.bindTo( 'center', marker, 'position' );
     }
 
+
+    function updateAddress( address ) {
+        var address = address.split( ',' );
+        address = 'near ' + address[1] + ', ' + address[2];
+        address = address.substr( 0, 30 );
+        $( mapDom.globalSearch.locationLabel ).text( address );
+        $( mapDom.globalSearch.locationIconLoading ).hide();
+        $( mapDom.globalSearch.locationIconMain ).show();
+    }
+
+    function updateLocation( address ) {
+        $( mapDom.globalSearch.locationIconMain ).hide();
+        $( mapDom.globalSearch.locationIconLoading ).show();
+        geolocationHandler.codeAddress( address, setCircleCenter );
+    }
+
+    function updatePosition( location ) {
+        $( mapDom.globalSearch.locationLabel ).html('');
+        $( mapDom.globalSearch.locationIconMain ).hide();
+        $( mapDom.globalSearch.locationIconLoading ).show();
+        setCircleCenter( location );
+        geolocationHandler.codePosition( location, updateAddress );
+    }
+
+
+    function setCircleCenter( newLocation ) {
+        var currentLocation = currentCircle.getCenter();
+        if ( currentLocation.lng() !== newLocation.lng() && currentLocation.lat() !== newLocation.lat() ) {
+            currentCircle.setCenter( newLocation );
+        }
+        var circleBounds = currentCircle.getBounds();
+        map.panTo( newLocation );
+        map.fitBounds( circleBounds );
+    }
 
     /**
      * process raw data
@@ -172,9 +237,13 @@ var FillMap = function( map, data ) {
         infoBoxHandler.update( pointer, userPosition );
 
         // mapInstance.panTo( newMapPosition );
-
     }
 
+
+    function createLatLngObject( userLocation ) {
+        var location = new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude );
+        updatePosition( location );
+    }
 
     /**
      * get the default marker settings for the store marker
@@ -185,7 +254,7 @@ var FillMap = function( map, data ) {
             animation : 'DROP',
             flat      : true,
             icon: {
-                path: fontawesome.markers.PUSHPIN,
+                path: fontawesome.markers.CIRCLE,
                 scale: 0.012,
                 strokeWeight: 0,
                 strokeColor: '#ffc000',
@@ -211,7 +280,6 @@ var FillMap = function( map, data ) {
             var dataLength = data.length;
             for ( var dataKey in data ) {
                 var currentSet = data[ dataKey ];
-                log( currentSet );
                 var latitude = currentSet.latitude;
                 var longitude = currentSet.longitude;
                 var markerLocation = new google.maps.LatLng( latitude,longitude );
@@ -226,12 +294,8 @@ var FillMap = function( map, data ) {
                 currentMarkerSettings.YPhone   = currentSet.phone;
                 currentMarkerSettings.YPicture = currentSet.picture;
                 currentMarkerSettings.YPrice   = currentSet.price;
-                log( currentMarkerSettings.YPrice );
-
                 var randomStatus = parseInt( ( Math.random() * 3 ), 10 );
                 currentMarkerSettings.YStatus = randomStatus;
-                // log( "status:"+currentMarkerSettings.YStatus );
-
 
                 if ( randomStatus === 0 ) {
                     currentMarkerSettings.icon.strokeColor = statusColors.available.color;
@@ -246,10 +310,6 @@ var FillMap = function( map, data ) {
                     currentMarkerSettings.icon.fillColor = statusColors.noInfo.color;
                     currentMarkerSettings.icon.strokeColor = statusColors.noInfo.color;
                 }
-                // log( "strokecolor:"+currentMarkerSettings.icon.strokeColor );
-                // log( "fillcolor:"+currentMarkerSettings.icon.fillColor );
-
-
                 var marker = new google.maps.Marker( currentMarkerSettings );
                 var listener = google.maps.event.addListener(marker, 'click', showStoreInfo );
                 markersToReturn.push( marker );
@@ -260,7 +320,45 @@ var FillMap = function( map, data ) {
         }
     }
 
+    function showLocationDropdown() {
+    }
 
+
+    function bindEvents() {
+        $( mapDom.globalSearch.locationContainer ).on( 'click', function() {
+            log( 'detected click' );
+            $( this ).popover( 'toggle' );
+        });
+
+        $( mapDom.globalSearch.locationAuto ).on( 'click', function() {
+            // DO SOMETHING
+        });
+
+        $( mapDom.globalSearch.container ).on( 'click',mapDom.globalSearch.locationUpdate , function() {
+            var userAddress = $( mapDom.globalSearch.locationInput ).val();
+            updateLocation( userAddress );
+            $( mapDom.globalSearch.locationLabel ).html('');
+            $( mapDom.globalSearch.locationContainer ).popover('toggle');
+        });
+
+        $( mapDom.globalSearch.container ).on( 'click',mapDom.globalSearch.locationAuto , function() {
+            $( mapDom.globalSearch.locationContainer ).popover('toggle');
+            $( mapDom.globalSearch.locationLabel ).html('');
+            $( mapDom.globalSearch.locationIconMain ).hide();
+            $( mapDom.globalSearch.locationIconLoading ).show();
+            geolocationHandler.detectLocation( createLatLngObject );
+        });
+
+        var dropdownHtml = $( mapDom.globalSearch.locationDropdown ).html();
+        $( mapDom.globalSearch.locationDropdown ).remove();
+        $( mapDom.globalSearch.locationContainer ).popover({
+            animation : true,
+            html      : true,
+            placement : 'bottom',
+            trigger   : 'manual',
+            content   : dropdownHtml
+        });
+    }
 
     /**
      * initialization function. SELF CALLING
@@ -271,6 +369,7 @@ var FillMap = function( map, data ) {
             if ( data ) {
                 mapInstance = map;
                 infoBoxHandler = new infoContainerHandler( mapInstance );
+                geolocationHandler = new locationModule();
                 initializeMapMenu();
                 rawData = data;
                 processData();
@@ -281,5 +380,6 @@ var FillMap = function( map, data ) {
             log( messages.noMap );
         }
 
+        bindEvents();
     })();
 };
