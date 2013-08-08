@@ -2892,10 +2892,8 @@ a:hover {
   padding-left: 10px;
 }
 .lnd-footer {
-  position: fixed;
-  top: 90%;
-  left: 0;
-  padding: 2%;
+  position: relative;
+  padding: 10px 2%;
   width: 96%;
   overflow: hidden;
 }
@@ -2905,6 +2903,7 @@ a:hover {
   margin-bottom: 1.2375rem;
   list-style: none;
   color: #4d4d4d;
+  margin: 0;
 }
 .lnd-footer .lnd-footer-inner .lnd-footer-list-item {
   display: inline;
@@ -2921,6 +2920,27 @@ a:hover {
 .lnd-footer .lnd-footer-inner .lnd-footer-sub-list .credits {
   opacity: 0.5;
   filter: alpha(opacity=50);
+}
+.phoney {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #707070), color-stop(0.51, #5e5e5e), color-stop(0.52, #393939));
+  background: -moz-linear-gradient(center top, #707070 0%, #5e5e5e 51%, #393939 52%);
+}
+.phoneytext {
+  text-shadow: 0 -1px 0 #000000;
+  color: #fff;
+  font-family: Helvetica Neue, Helvetica, arial;
+  font-size: 18px;
+  line-height: 25px;
+  padding: 4px 45px 4px 15px;
+  font-weight: bold;
+  background: url(../images/arrow.png) 95% 50% no-repeat;
+}
+.phoneytab {
+  text-shadow: 0 -1px 0 #000000;
+  color: #fff;
+  font-family: Helvetica Neue, Helvetica, arial;
+  font-size: 18px;
+  background: #707070 !important;
 }
 /* iCheck plugin Flat skin, red
 ----------------------------------- */
@@ -6710,12 +6730,10 @@ body {
 }
 .search-sc .search-main-sc {
   overflow: hidden;
-  position: fixed;
+  position: relative;
   display: block;
   width: 100%;
-  top: 84px;
-  left: 0;
-  height: 80%;
+  height: 570px;
 }
 .search-sc .search-main-sc .search-product-sc {
   float: left;
@@ -6924,12 +6942,10 @@ body {
 }
 .product-sc .product-main-sc {
   overflow: hidden;
-  position: fixed;
+  position: relative;
   display: block;
   width: 100%;
-  top: 42px;
-  left: 0;
-  height: 90%;
+  height: 610px;
 }
 .product-sc .product-store-sc {
   float: left;
@@ -6945,6 +6961,51 @@ body {
   position: relative;
   height: 100%;
 }
+.product-sc .product-store-sc .product-store-inner .product-store-item {
+  position: relative;
+  width: 100%;
+  padding: 5px 0;
+  border-bottom: 1px solid #cccccc;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner {
+  overflow: hidden;
+  position: relative;
+  padding: 5px;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner .store-info {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner .store-info .store-image {
+  float: left;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner .store-info .store-image img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner .store-info .store-name {
+  font-size: 24px;
+  font-size: 1.3333333333333333rem;
+  margin-bottom: 1.2375rem;
+  font-weight: 400;
+  margin: 0 2.5%;
+  float: left;
+  width: 45%;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-item .product-store-item-inner .store-info .store-price {
+  font-size: 24px;
+  font-size: 1.3333333333333333rem;
+  margin-bottom: 1.2375rem;
+  color: #e95a5a;
+  width: 30%;
+  float: left;
+  margin: 0;
+}
 .product-info-main {
   display: block;
   position: relative;
@@ -6953,7 +7014,7 @@ body {
   background: #f1f1f1;
 }
 .product-info-main .product-info-inner {
-  padding: 10px 5%;
+  padding: 10px 5px;
   overflow: hidden;
 }
 .product-info-main .product-info-inner .product-info-left {
@@ -6961,27 +7022,36 @@ body {
   position: relative;
   float: left;
 }
+.product-info-main .product-info-inner .product-info-left .product-image {
+  float: left;
+}
 .product-info-main .product-info-inner .product-info-left .product-name {
-  font-size: 48px;
-  font-size: 2.6666666666666665rem;
-  margin-bottom: 0.61875rem;
+  font-size: 36px;
+  font-size: 2rem;
+  margin-bottom: 0.825rem;
+  margin-left: 10px;
+  margin-bottom: 0;
   overflow: hidden;
   float: left;
-  font-weight: 100;
 }
 .product-info-main .product-info-inner .product-info-left .product-sub {
-  font-size: 48px;
-  font-size: 2.6666666666666665rem;
-  margin-bottom: 0.61875rem;
+  font-size: 36px;
+  font-size: 2rem;
+  margin-bottom: 0.825rem;
+  margin-left: 10px;
+  margin-bottom: 0;
   float: left;
   color: #333333;
+  font-weight: 100;
 }
 .product-info-main .product-info-inner .product-info-left .product-price {
-  font-size: 48px;
-  font-size: 2.6666666666666665rem;
-  margin-bottom: 0.61875rem;
+  font-size: 36px;
+  font-size: 2rem;
+  margin-bottom: 0.825rem;
   color: #e95a5a;
+  margin-bottom: 0;
   float: left;
+  margin-left: 20px;
 }
 .product-info-main .product-info-inner .product-info-left .product-price .product-price-value {
   display: inline;
@@ -6992,16 +7062,14 @@ body {
   position: relative;
 }
 .product-info-main .product-info-inner .product-info-right .product-more-details-container {
-  font-size: 24px;
-  font-size: 1.3333333333333333rem;
-  margin-bottom: 1.2375rem;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  font-size: 21px;
+  font-size: 1.1666666666666667rem;
+  margin-bottom: 1.4142857142857141rem;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+.product-info-main .product-info-inner .product-info-right .product-more-details-container .product-more-details-button {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
@@ -7013,15 +7081,14 @@ body {
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  background: #4d4d4d;
+  color: white;
   padding: 10px;
   text-align: center;
   cursor: pointer;
-  float: left;
+  background: #4d4d4d;
   width: 100px;
-  background: #333333;
-  color: white;
+  padding: 8px 10px;
 }
-.product-info-main .product-info-inner .product-info-right .product-more-details-container:hover {
+.product-info-main .product-info-inner .product-info-right .product-more-details-container .product-more-details-button:hover {
   background: #1a1a1a;
 }

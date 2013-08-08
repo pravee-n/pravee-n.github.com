@@ -55,9 +55,10 @@ var searchController = ( function(){
                 mapInstance.setCenter( results[0].geometry.location );
                 mapInstance.fitBounds( results[0].geometry.viewport );
             }
+            getData();
         });
         log( messages.mapLoad );
-        getData();
+
     }
 
 

@@ -315,8 +315,8 @@ var locationModule = function() {
      * @param  {Google LatLng Object}   position Google latLng object.
      * @param  {Function}               callback Function to callback when the request completes
      */
-    function codePosition( position, callback ) {
-        log( messages.codePosition );
+    function codePosition( position, callback, argument ) {
+        log( messages.codePosition + position );
         var address;
         if ( geocoder ) {
             if( position ) {
@@ -324,12 +324,12 @@ var locationModule = function() {
                     if ( status === google.maps.GeocoderStatus.OK ) {
                         address = results[0].formatted_address;
                         if ( callback ) {
-                            callback( address );
+                            callback( address, argument );
                         } else {
                             log( messages.noCallback );
                         }
                     } else {
-                        log( messages.geocodeNotAvailable );
+                        log( messages.geocodeNotAvailable + ' ' + status );
                     }
                 });
             } else {
@@ -373,7 +373,6 @@ var locationModule = function() {
         currentLocation    : currentLocation,
         detectLocation     : detectLocation
     };
-
 };
 
 

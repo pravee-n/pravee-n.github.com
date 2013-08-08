@@ -1,7 +1,7 @@
 var FillMap = function( map, data ) {
 
     // Declaring all the variables to be used by this module.
-    var mapInstance, rawData, currentData, currentStores, infoBoxHandler, currentZoom, defaultCluster, currentCluster, currentCircle;
+    var mapInstance, rawData, currentData, currentStores, infoBoxHandler, currentZoom, defaultCluster, currentCluster, currentCircle, currentClusterCount, currentClusterInfobubbles;
     var log = bows( 'fillMap' );
 
     /**
@@ -110,12 +110,129 @@ var FillMap = function( map, data ) {
     function generateClusters () {
         var markers = buildMarkers( currentStores );
         var markerCluster = new MarkerClusterer( mapInstance, markers, {
-            maxZoom : 11
+            maxZoom : 13,
+            minimumClusterSize : 5,
+            gridSize : 60
         } );
         defaultCluster= markerCluster;
+        google.maps.event.addListener( markerCluster, 'clusteringend', function(){
+            var currentClusters = defaultCluster.getClusters();
+            checkClusterTooltip( currentClusters );
+        });
+
         currentUserPosition = defaultCluster;
         geolocationHandler.detectLocation( generateDistanceCircle );
     }
+
+
+    /**
+     * returns active clusters. By default clusters also include clusters with values less than 5
+     * this function filters them to return only those clusters which have markers greater than 5
+     * @param  {Array} currentClusters array containing the current clusters
+     * @return {Array}                 active clusters
+     */
+    function getActiveClusters( currentClusters ) {
+        var activeClusters = [];
+        for( var item in currentClusters ) {
+            var cluster = currentClusters[ item ];
+            if ( cluster.getSize() > 4 ) {
+                activeClusters.push( cluster );
+            }
+        }
+        return activeClusters;
+    }
+
+
+    /**
+     * Check the current state of the clusters with the previous state
+     * and see if the cluster tooltips needs to be redrawn.
+     * @param  {Array} currentClusters Array containing the current clusters to check the tooltip for
+     */
+    function checkClusterTooltip( currentClusters ) {
+        var activeClusters = getActiveClusters( currentClusters );
+        var newCount = activeClusters.length;
+        log( newCount + ':' + currentClusterCount );
+        if ( newCount !== currentClusterCount ) {
+            addInfoBoxToClusters( activeClusters );
+            currentClusterCount = newCount;
+        } else {
+            log( 'cluster length has not changed' );
+        }
+    }
+
+
+    /**
+     * if the clusters view has changed, then remove all the current info bubbles.
+     */
+    function resetInfoBox() {
+        for( var item in currentClusterInfobubbles ) {
+            var infoBubble = currentClusterInfobubbles[ item ];
+            infoBubble.close();
+            infoBubble.onRemove();
+        }
+        currentClusterInfobubbles = [];
+    }
+
+
+    function getInfoBubbleSettings() {
+
+        return {
+            map: map,
+            content: '<div class="phoneytext">Some label</div>',
+            position: new google.maps.LatLng(-35, 151),
+            shadowStyle: 0,
+            padding: 0,
+            backgroundColor: 'rgb(57,57,57)',
+            borderRadius: 4,
+            arrowSize: 10,
+            borderWidth: 1,
+            borderColor: '#2c2c2c',
+            disableAutoPan: true,
+            hideCloseButton: true,
+            arrowPosition: 50,
+            backgroundClassName: 'phoney',
+            arrowStyle: 0
+        };
+
+    }
+
+
+    /**
+     * reset the view port and add new info boxes to the currently active clusters.
+     */
+    function addInfoBoxToClusters( currentClusters ) {
+        resetInfoBox();
+        for( var key in currentClusters ) {
+            log( 'trying a new infoBubble ' + key );
+            var settings = getInfoBubbleSettings();
+            var infoBubble2 = new InfoBubble( settings );
+            var cluster = ( function(){ return currentClusters[ key ]; } )();
+            var location = ( function(){ return cluster.getCenter(); } )();
+            var size = cluster.getSize();
+            currentClusterInfobubbles.push( infoBubble2 );
+            infoBubble2.position = location;
+        }
+
+        for( var item in currentClusterInfobubbles ){
+            log( currentClusterInfobubbles[item].position );
+            setTimeout( showInfoBubble( currentClusterInfobubbles[item] ) , 1000*item );
+        }
+    }
+
+
+    function showInfoBubble( infoBubble ) {
+            var toRun = function() {
+                geolocationHandler.codePosition( infoBubble.position, function( address ) {
+                    log( address );
+                    log( infoBubble );
+                    infoBubble.content = '<div class="phoneytext">' + address.split(',')[1] + '</div>';
+                    infoBubble.open( mapInstance );
+                });
+            };
+            return toRun;
+    }
+
+
 
     /**
      * generate draggable circle for user.
@@ -146,7 +263,7 @@ var FillMap = function( map, data ) {
 
         currentCircle = new google.maps.Circle({
             map          : mapInstance,
-            radius       : 10000,
+            radius       : 3000,
             fillColor    : '#666666',
             fillOpacity  : 0.07,
             strokeColor  : '#ffb600',
@@ -195,6 +312,7 @@ var FillMap = function( map, data ) {
 
 
     function setCircleCenter( newLocation ) {
+        log( 'setCicleCenter called' );
         var currentLocation = currentCircle.getCenter();
         if ( currentLocation.lng() !== newLocation.lng() && currentLocation.lat() !== newLocation.lat() ) {
             currentCircle.setCenter( newLocation );
@@ -370,6 +488,7 @@ var FillMap = function( map, data ) {
                 mapInstance = map;
                 infoBoxHandler = new infoContainerHandler( mapInstance );
                 geolocationHandler = new locationModule();
+                currentClusterCount = 0;
                 initializeMapMenu();
                 rawData = data;
                 processData();
