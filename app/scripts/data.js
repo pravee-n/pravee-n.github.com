@@ -5,12 +5,12 @@ var mainData = ( function() {
     var log = bows( 'data' );
 
     var messages = {
-        fetchedData   : 'Received data from the server',
-        noRawData     : 'No raw data exists',
-        dataProcessed : 'Processed Data',
+        fetchedData             : 'Received data from the server',
+        noRawData               : 'No raw data exists',
+        dataProcessed           : 'Processed Data',
         requestedProductDetails : 'Requested data for product ',
-        noProductId : 'No product id',
-        noCallback : 'Requested data but no callback provided'
+        noProductId             : 'No product id',
+        noCallback              : 'Requested data but no callback provided'
     };
 
 
@@ -30,6 +30,10 @@ var mainData = ( function() {
         });
     }
 
+
+    /**
+     * Process raw data and make an array of stores
+     */
     function processData() {
         if ( rawData ) {
             var allProducts = rawData.result;
@@ -54,12 +58,22 @@ var mainData = ( function() {
         }
     }
 
+    /**
+     * Get all products.
+     * @param  {Function} callback Callback to be fired
+     */
     function getProducts( callback ) {
         if ( processedData && processedData.hasOwnProperty( 'allProducts' ) ) {
             callback( processedData.allProducts );
         }
     }
 
+
+    /**
+     * Get details and stores of a single product.
+     * @param  {String}   id       product ID for which the dat needs to be returned
+     * @param  {Function} callback callback function.
+     */
     function getProductObject( id, callback ) {
         log( messages.requestedProductDetails );
         if( id ) {
@@ -79,6 +93,10 @@ var mainData = ( function() {
     }
 
 
+    /**
+     * Get all the stores
+     * @param  {Function} callback Callback function
+     */
     function getStores( callback ) {
         if ( processedData && processedData.hasOwnProperty( 'allStores' ) ) {
             callback( processedData.allStores );
@@ -87,7 +105,9 @@ var mainData = ( function() {
 
 
     /**
-     * Function to return data.
+     * Function to return all data. Should not be called. If some content is required and the current
+     * function do not support it, then the API should be extended with a new function like
+     * getProductObject, getStores etc.
      * @param  Function     callback    Callback function to be passed when data is processed.
      * @return Object     data Object
      */

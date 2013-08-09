@@ -1,20 +1,38 @@
 var EYS = {};
 
 
+
+/**
+ * Modules responsible for handling the logic of shortlist. Provides basic add, remove and fetch list functionality.
+ * @return {[type]} [description]
+ */
 var YShortlist = (function() {
 
     var shortlistedItems;
     shortlistedItems = [];
 
+    /**
+     * Storing all dom access selectors here
+     * @type Object
+     */
     var dom = {
         shortlistValue : '.js-shortlist-value'
     };
 
+
+    /**
+     * Add a pointer to the shortlist
+     * @param {Google maps pointer} pointer Google maps pointer object
+     */
     function add( pointer ) {
         shortlistedItems.push( pointer );
         pointer.isShortlist = true;
     }
 
+    /**
+     * Get the list of shortlisted items
+     * @return {Array} Array of pointers in the shortlist
+     */
     function getList(){
         return shortlistedItems;
     }
@@ -23,14 +41,27 @@ var YShortlist = (function() {
         add     : add,
         getList : getList
     };
-
 })();
 
+/**
+ * ---------- END OF SHORTLIST MODULE ---------------
+ */
 
+
+/**
+ * Module responsible for handling all the actions related to the info
+ * box that appears on the map
+ *
+ * @param  {Google Maps object} map Instance of the map to attach the info box to.
+ */
 var infoContainerHandler = function( map ) {
 
     var mapInstance, currentPointer, currentUserPosition, isCompiled, compiledTemplate, directionsDisplay, isInserted, currentStoreInfoObject;
 
+    /**
+     * Contains all DOM references to be used by this module.
+     * @type {Object}
+     */
     var dom = {
         mainContainer       : '.js-store-info-main',
         title               : '.js-store-title',
@@ -53,11 +84,19 @@ var infoContainerHandler = function( map ) {
         closeInfoBox        : '.js-search-info-close'
     };
 
+    /**
+     * Contains all the logging messages for this module
+     * @type {Object}
+     */
     var messages = {
         noMap : 'Map instance not provided',
         noUpdate : 'Update called but insufficient arguments. Abort'
     };
 
+    /**
+     * Contains all the settings for this module
+     * @type {Object}
+     */
     var settings = {
         template : 'scripts/templates/storeInfo.template'
     };
@@ -88,6 +127,12 @@ var infoContainerHandler = function( map ) {
         }
     }
 
+
+    /**
+     * Initialization function. Called automatically whenever an object of this module
+     * has been created. Handles all the initialization tasks to be done.
+     * @return {[type]} [description]
+     */
     (function init() {
         if ( map ) {
             mapInstance = map;
@@ -140,7 +185,6 @@ var infoContainerHandler = function( map ) {
         $( dom.closeInfoBox ).on( 'click', function(){
             $( dom.mainContainer ).slideUp( 'fast' );
         });
-
     }
 
 
@@ -183,32 +227,20 @@ var infoContainerHandler = function( map ) {
     }
 
 
+    /**
+     * Show directions on the map
+     */
     function renderDirections(){
         $( dom.storeExpand ).click();
         clearCurrentDirections();
         directionsDisplay.setMap( mapInstance );
         directionsDisplay.setDirections( currentStoreInfoObject.directionResponse );
-        // google.maps.event.addListenerOnce(mapInstance, 'idle', function(){
-        //     var pointer = currentPointer;
-
-        //     var bounds = mapInstance.getBounds();
-        //     var ne = bounds.getNorthEast();
-        //     var sw = bounds.getSouthWest();
-
-        //     var userPosition = EYS.currentUserPosition.getPosition();
-        //     var pointerPosition = pointer.getPosition();
-        //     var userLeft = pointerPosition.lng();
-        //     var userTop = pointerPosition.lat();
-        //     var mapDistance = Math.abs( sw.lng() - ne.lng() );
-        //     var newPan = userLeft + 0.2 * mapDistance ;
-        //     log( newPan );
-        //     var newMapPosition = new google.maps.LatLng( userTop ,newPan );
-
-        //     mapInstance.panTo( newMapPosition );
-        // });
     }
 
 
+    /**
+     * Finally inserts the info box and shows it with the animation.
+     */
     function renderTemplate() {
         log( currentStoreInfoObject );
         var html = compiledTemplate( currentStoreInfoObject );
@@ -220,7 +252,127 @@ var infoContainerHandler = function( map ) {
     return {
         update : update
     };
+};
 
+/**
+ * ---------- END OF INFO CONTAINER MODULE ---------------
+ */
+
+
+
+var locationModule = function() {
+    var geocoder, currentLocation;
+
+    var log = bows( 'locationModule' );
+
+    /**
+     * Contains all DOM references to be used by this module.
+     * @type {Object}
+     */
+
+    var messages = {
+        codeAddress : 'Request received for coding address',
+        codePosition : 'Request received for coding co-ordinates',
+        noAddress: 'No address provided',
+        noCallback : 'No callback provided',
+        currentLocation : 'Request received for current location',
+        noCurrentLocation : 'HTML5 geolocation is not available',
+        updateCurrentLocation : 'Requested to update current location',
+        geocodeNotAvailable : 'Google geocode service is not available'
+    };
+
+    /**
+     * Get the latitude and longitude of the address provided
+     * @param  {String}   address  Address to lookup google for.
+     * @param  {Function} callback Function to callback when the request completes
+     */
+    function codeAddress( address, callback ) {
+        log( messages.codeAddress );
+        var position;
+        if ( geocoder ) {
+            if( address ) {
+                geocoder.geocode( {'address' : address}, function( results, status ) {
+                    log( status );
+                    if ( status === google.maps.GeocoderStatus.OK ) {
+                        position = results[0].geometry.location;
+                        if ( callback ) {
+                            callback( position );
+                        } else {
+                            log( messages.noCallback );
+                        }
+                    } else {
+                        log( messages.geocodeNotAvailable );
+                    }
+                });
+            } else {
+                log( messages.noAddress );
+            }
+        }
+    }
+
+    /**
+     * Get the address of the current co-ordinates on the map.
+     * @param  {Google LatLng Object}   position Google latLng object.
+     * @param  {Function}               callback Function to callback when the request completes
+     */
+    function codePosition( position, callback, argument ) {
+        log( messages.codePosition + position );
+        var address;
+        if ( geocoder ) {
+            if( position ) {
+                geocoder.geocode( {'latLng' : position}, function( results, status ) {
+                    if ( status === google.maps.GeocoderStatus.OK ) {
+                        address = results[0].formatted_address;
+                        if ( callback ) {
+                            callback( address, argument );
+                        } else {
+                            log( messages.noCallback );
+                        }
+                    } else {
+                        log( messages.geocodeNotAvailable + ' ' + status );
+                    }
+                });
+            } else {
+                log( messages.noAddress );
+            }
+        }
+    }
+
+    /**
+     * Get the current location of the user
+     * @param  {Function} callback Function to callback when the request completes
+     */
+    function getCurrentLocation( callback ){
+    }
+
+
+    function detectLocation( callback ) {
+        if ( Modernizr.geolocation ) {
+            navigator.geolocation.getCurrentPosition( callback );
+        } else {
+            callback( false );
+        }
+    }
+
+
+    /**
+     * update the current location of the user
+     * @param  {Function} callback Function to callback when the request completes
+     */
+    function updateCurrentLocation( position, callback ) {
+    }
+
+    (function init(){
+        geocoder = new google.maps.Geocoder();
+    })();
+
+    return {
+        codeAddress        : codeAddress,
+        codePosition       : codePosition,
+        getCurrentLocation : getCurrentLocation,
+        currentLocation    : currentLocation,
+        detectLocation     : detectLocation
+    };
 };
 
 

@@ -22,13 +22,44 @@
     </head>
     <body>
 
-    <div class="search-header">
+    <div class="search-header lnd-header">
         <div class="lnd-logo-container">
             <i class="icon-rocket icon"></i>
             <span class="item1">E</span>
             <span class="item2">Y</span>
             <span class="item3">S</span>
         </div>
+        <div class="main-search-container js-global-search-container">
+            <div class="search-input">
+                <input type="text" class="main-search-input js-main-search-input" value="Dummy search text">
+            </div>
+            <div class="search-location-sc js-location-container">
+                <div class="search-location-label js-location-label"></div>
+                <i class="icon-caret-down icon js-search-location-icon-main"></i>
+                <i class="icon-spinner icon-spin icon js-search-location-icon-loading"></i>
+                <div class="search-location-dropdown js-location-dropdown">
+                    <div class="search-location-dropdown-auto js-location-autodetect">
+                        <i class="icon icon-screenshot"></i>
+                        <div class="auto-text">
+                            Detect location
+                        </div>
+                    </div>
+
+                    <div class="search-location-dropdown-input">
+                        <input type="text" placeholder="enter your location" class="js-search-location">
+                    </div>
+                    <div class="search-location-dropdown-update-button js-update-location-button">
+                        UPDATE LOCATION
+                    </div>
+                </div>
+            </div>
+            <div class="search-input-icon">
+                <i class="icon-search icon"></i>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+            <div class="clearfix"></div>
     </div>
 
 
@@ -37,12 +68,16 @@
             <div class="product-info-main">
                 <div class="product-info-inner">
                     <div class="product-info-left">
+                        <div class="product-image">
+                            <img src="http://placehold.it/32x32" alt="">
+                        </div>
                         <div class="product-name"> Samsung Galaxy Tab </div>
                         <div class="product-sub"> 32GB White </div>
                         <div class="product-price">
                             <i class="icon-inr"></i>
                             <div class="product-price-value">23,512</div>
                         </div>
+
                     </div>
                     <div class="product-info-right">
                         <div class="product-more-details-container">
@@ -55,7 +90,6 @@
             </div>
 
             <div class="product-store-sc">
-                <!-- NEED TO ADD PRODUCT CONTAINER HERE -->
                 <div class="product-store-inner"></div>
             </div>
             <div class="search-map-sc js-map-container">
@@ -90,7 +124,6 @@
                 <div class="lnd-footer-list-item">Contact</div>
                 <div class="lnd-footer-list-item">Terms and Conditions</div>
                 <div class="lnd-footer-list-item">Privacy Policy</div>
-                <div class="lnd-footer-list-item"></div>
             </div>
             <div class="lnd-footer-sub-list">
                 <div class="lnd-footer-list-item">

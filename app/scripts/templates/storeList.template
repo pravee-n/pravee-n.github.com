@@ -1,12 +1,12 @@
 {{#each stores}}
-    <div class="search-product-item js-product-item">
-        <div class="search-product-item-inner">
-            <div class="product-info js-product-info">
-                <div class="product-image">
+    <div class="product-store-item js-store-item">
+        <div class="product-store-item-inner">
+            <div class="store-info js-store-info">
+                <div class="store-image">
                     <img src="{{picture}}" alt="{{name}} image">
                 </div>
-                <div class="product-name">{{name}}</div>
-                <div class="product-price"><i class="icon-inr"></i> 23,500</div>
+                <div class="store-name">{{name}}</div>
+                <div class="store-price"><i class="icon-inr"></i> 23,500</div>
             </div>
         </div>
     </div>

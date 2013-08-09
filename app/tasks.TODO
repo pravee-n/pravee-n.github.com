@@ -1,0 +1,9 @@
+ EYS:
+
+ ☐ make the HTML5 Geoloation a seperate module #fillMap.js
+ ☐ Combine the search and geolocation
+ ☐ Add a delete shortlisted items option in shortlist #modules.js
+ ☐ Make getting directions a different module #modules.js
+ ☐ Need to convert the filters function DOM accessed to object #search.js
+
+
