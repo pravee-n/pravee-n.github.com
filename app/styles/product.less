@@ -7,7 +7,7 @@
         position: relative;
         display: block;
         width: 100%;
-        height: 610px;
+        height: 650px;
     }
     .product-store-sc {
         float: left;
@@ -21,6 +21,52 @@
             overflow: hidden;
             position: relative;
             height: 100%;
+            .product-store-section {
+                overflow: hidden;
+                position: relative;
+                height: 85.9%;
+                &.collapse {
+                    height: auto;
+                }
+                .section-title {
+                    .delta;
+                    padding: 10px 2%;
+                    overflow: hidden;
+                    position: relative;
+                    width: 96%;
+                    height: 3%;
+                    margin: 0;
+                    opacity: 0.75;
+                    background: @offWhite;
+                    border-bottom: 1px solid;
+                    cursor: pointer;
+                    .icon-chevron-down {
+                        display: none;
+                    }
+                    .section-title-text {
+                        display: inline;
+                        padding-left: 10px;
+                    }
+                }
+                .section-store-container {
+                    overflow: hidden;
+                    position: relative;
+                    display: none;
+                    height: 97%;
+                }
+                &.section-inStock {
+                    .section-title {
+                        border-color: @brand-success;
+                        color: @brand-success;
+                    }
+                }
+                &.section-outStock {
+                    .section-title {
+                        border-color: @brand-danger;
+                        color: @brand-danger;
+                    }
+                }
+            }
             .product-store-item {
                 position: relative;
                 width: 100%;
@@ -123,6 +169,142 @@
                     background: @black-70;
                     width: 100px;
                     padding: 8px 10px;
+                }
+            }
+        }
+    }
+}
+
+.product-details-sc {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    width: 96%;
+    padding: 0 2%;
+    .product-details-inner {
+        overflow: hidden;
+        padding: 10px;
+        position: relative;
+        .product-details-title {
+            .gamma;
+            font-weight: 700;
+            border-bottom: 2px solid @offWhite;
+            padding: 10px 1%;
+            width: 98%;
+            margin: 0;
+            overflow: hidden;
+            color: @black-50;
+            .product-details-title-text {
+                display: inline;
+                padding-left: 10px;
+            }
+        }
+        .product-details-main {
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            .product-details-image-sc {
+                float: left;
+                width: 40%;
+                overflow: hidden;
+                text-align: center;
+                img {
+                    display: inline;
+                    width: 100%;
+                }
+            }
+            .product-details-info-sc {
+                overflow: hidden;
+                position: relative;
+                float: left;
+                width: 50%;
+                padding: 0 5%;
+                .product-name {
+                    .beta;
+                    font-weight: 700;
+                    width: 100%;
+                    float: left;
+                    margin-bottom: 20px;
+                }
+                .product-availability {
+                    .delta;
+                    float: left;
+                    width: 100%;
+                    margin-bottom: 20px;
+                    position: relative;
+                    .product-availability-item {
+                        width: 45%;
+                        margin-right: 5%;
+                        float: left;
+                        overflow: hidden;
+                        position: relative;
+                        .product-availability-text {
+                            display: inline;
+                            padding-left: 10px;
+                        }
+                        .product-availability-icon {
+                            display: inline;
+                        }
+                        &.inStock {
+                            .icon {
+                                color: @brand-success;
+                            }
+                        }
+                        &.outStock {
+                            .icon {
+                                color: @brand-danger;
+                            }
+                        }
+                    }
+                }
+                .product-price {
+                    .gamma;
+                    color: @brand-primary;
+                    width: 100%;
+                    margin-bottom: 20px;
+                    position: relative;
+                    float: left;
+                }
+                .product-desc {
+                    .delta;
+                    float: left;
+                    color: @black-70;
+                    line-height: 1.5em;
+                    margin-bottom: 20px;
+                    width: 100%;
+                    position: relative;
+                }
+            }
+        }
+        .product-details-spec-sc {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            .product-details-title {
+                margin-bottom: 10px;
+            }
+            .product-details-spec-item {
+                .delta;
+                margin: 0;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                float: left;
+                border-bottom: 1px dotted @offWhite;
+                .product-details-spec-label {
+                    padding: 10px 0;
+                    width: 30%;
+                    float: left;
+                    font-weight: 700;
+                }
+                .product-details-spec-value {
+                    float: left;
+                    padding: 10px 0;
+                    width: 65%;
+                    font-weight: 400;
+                    padding-left: 4%;
+                    border-left: 1px solid @black-40;
                 }
             }
         }
