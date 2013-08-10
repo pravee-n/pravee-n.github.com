@@ -110,7 +110,6 @@ var productController = ( function(){
     return {
         init : init
     };
-
 })();
 
 
