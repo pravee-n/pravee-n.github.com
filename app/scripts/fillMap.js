@@ -15,7 +15,8 @@ var FillMap = function( map, data ) {
         foundData        : 'Received and set data',
         generatedCluster : 'generated cluster for the given points',
         noStores         : 'stores parameter not found in the provided data',
-        showStoreInfo    : 'show store info handler called'
+        showStoreInfo    : 'show store info handler called',
+        clustersRequested : 'Generate clusters called'
     };
 
     /**
@@ -102,12 +103,11 @@ var FillMap = function( map, data ) {
         });
     }
 
-
-
     /**
      * generate clusters from the current store data
      */
     function generateClusters () {
+        log( messages.clustersRequested );
         var markers = buildMarkers( currentStores );
         var markerCluster = new MarkerClusterer( mapInstance, markers, {
             maxZoom : 13,
@@ -193,7 +193,6 @@ var FillMap = function( map, data ) {
             backgroundClassName: 'phoney',
             arrowStyle: 0
         };
-
     }
 
 
@@ -232,14 +231,11 @@ var FillMap = function( map, data ) {
             return toRun;
     }
 
-
-
     /**
      * generate draggable circle for user.
      * @param  {HTML5 geolocation OBject } userLocation [description]
      */
     function generateDistanceCircle ( userLocation ) {
-
         var location = new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude );
         var marker = new google.maps.Marker({
             map       : mapInstance,
@@ -286,7 +282,6 @@ var FillMap = function( map, data ) {
         currentCircle.bindTo( 'center', marker, 'position' );
     }
 
-
     function updateAddress( address ) {
         var address = address.split( ',' );
         address = 'near ' + address[1] + ', ' + address[2];
@@ -309,7 +304,6 @@ var FillMap = function( map, data ) {
         setCircleCenter( location );
         geolocationHandler.codePosition( location, updateAddress );
     }
-
 
     function setCircleCenter( newLocation ) {
         log( 'setCicleCenter called' );
@@ -391,7 +385,6 @@ var FillMap = function( map, data ) {
      */
     function buildMarkers( data ) {
         var log = bows( 'buildMarkers' );
-        log( data );
         markersToReturn = [];
         if ( data ) {
             log ( 'Building Markers from the data provided' );

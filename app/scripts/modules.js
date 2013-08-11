@@ -266,7 +266,7 @@ var locationModule = function() {
     var log = bows( 'locationModule' );
 
     /**
-     * Contains all DOM references to be used by this module.
+     * Contains all logging messages to be used by this module.
      * @type {Object}
      */
 

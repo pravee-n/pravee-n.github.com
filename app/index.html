@@ -18,10 +18,10 @@
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
-
     </head>
     <body>
 
+    <!-- HEADER STARTS HERE -->
     <div class="lnd-header">
         <div class="lnd-logo-container">
             <i class="icon-rocket icon"></i>
@@ -42,29 +42,44 @@
             <li class="lnd-menu-item">
                 <a href="#"><i class="icon-twitter"></i></a>
             </li>
-
         </div>
     </div>
+    <!-- HEADER ENDS HERE -->
 
+    <!-- MAP CONTAINER STARTS -->
     <div class="lnd-sc">
         <div id="map-canvas"></div>
     </div>
+    <!-- MAP CONTAINER ENDS -->
 
+    <!-- MAIN CONTAINER STARTS -->
     <div class="lnd-main-container">
         <div class="lnd-main-container-inner">
             <div class="lnd-main-text">
-                <span> Find where to buy your next product from </span>
+                <div class="main"> Find where to buy your next </div>
+                <span class="lnd-rotate-item item1 active">product</span>
+                <span class="lnd-rotate-item item2">iPad</span>
+                <span class="lnd-rotate-item item3">Galaxy SIII</span>
+                <span class="lnd-rotate-item item4">Fila Sneakers</span>
+                <span class="lnd-rotate-item item5">Shoes</span>
             </div>
             <input type="text" class="lnd-main-input-container" placeholder="Enter the product you want to search for">
             <div class="lnd-main-submit">
                 <a href="search.html"><i class="icon-chevron-right"></i></a>
             </div>
-            <div class="lnd-sub-text">
+            <div class="lnd-current-location">
+                <i class="icon-screenshot icon"></i>
+                <div class="lnd-current-location-label">
+                    Your current location
+                </div>
+                <input type="text" class="lnd-location-input">
+                <div class="lnd-location-button">Change</div>
             </div>
         </div>
     </div>
+    <!-- MAIN CONTAINER ENDS -->
 
-    <div class="lnd-footer">
+    <div class="lnd-footer modLanding">
         <div class="lnd-footer-inner">
             <div class="lnd-footer-list">
                 <div class="lnd-footer-list-item">About Us</div>
@@ -91,6 +106,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABgtYpOQt-iiqyErJMaJ5huCVMK12JQHk&libraries=drawing&sensor=false">
       </script>
 
+
         <!-- build:js scripts/libraries.js -->
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
@@ -98,6 +114,7 @@
         <script src="bower_components/bootstrap/js/bootstrap-tooltip.js"></script>
         <script src="bower_components/bootstrap/js/bootstrap-popover.js"></script>
         <script src="scripts/jquery.icheck.js"></script>
+        <script src="scripts/infobubble.js"></script>
         <script src="scripts/markerclusterer.js"></script>
         <script src="scripts/fontawesome-markers.js"></script>
         <script src="scripts/bows.js"></script>

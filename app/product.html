@@ -90,7 +90,26 @@
             </div>
 
             <div class="product-store-sc">
-                <div class="product-store-inner"></div>
+                <div class="product-store-inner">
+                    <div class="product-store-section section-inStock collapse">
+                        <div class="section-title">
+                            <i class="icon icon-chevron-right"></i>
+                            <i class="icon icon-chevron-down"></i>
+                            <div class="section-title-text">In Stock in 23 Stores</div>
+                        </div>
+                        <div class="section-store-container">
+                        </div>
+                    </div>
+                    <div class="product-store-section section-outStock collapse">
+                        <div class="section-title">
+                            <i class="icon icon-chevron-right"></i>
+                            <i class="icon icon-chevron-down"></i>
+                            <div class="section-title-text">Out of Stock in 13 Stores</div>
+                        </div>
+                        <div class="section-store-container">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="search-map-sc js-map-container">
                 <div class="search-info-sc js-store-info-main">
@@ -112,6 +131,78 @@
                 <div id="map-canvas" class="js-map-canvas"></div>
             </div>
         </div>
+        <div class="product-details-sc">
+            <div class="product-details-inner">
+                <div class="product-details-title">
+                    <i class="icon icon-info-sign"></i>
+                    <div class="product-details-title-text"> PRODUCT DETAILS </div>
+                </div>
+                <div class="product-details-main">
+                    <div class="product-details-image-sc">
+                        <img src="http://placeimg.com/640/480/tech" alt="">
+                    </div>
+                    <div class="product-details-info-sc">
+                        <div class="product-name"> Samsung Galaxy Tab </div>
+                        <div class="product-availability">
+                            <div class="product-availability-item inStock">
+                                <div class="product-availability-icon "><i class="icon-circle icon"></i></div>
+                                <div class="product-availability-text"><span>In stock in 23 Stores</span></div>
+                            </div>
+                            <div class="product-availability-item outStock">
+                                <div class="product-availability-icon"><i class="icon-circle icon"></i></div>
+                                <div class="product-availability-text"><span>Out of Stock in 3 Stores</span></div>
+                            </div>
+                        </div>
+                        <div class="product-price">
+                            <i class="icon icon-inr"></i>
+                            <span>23,512</span>
+                        </div>
+                        <div class="product-desc">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, sit voluptatibus facilis blanditiis facere veniam tenetur assumenda tempore obcaecati laboriosam excepturi architecto laborum in earum sint soluta quae adipisci molestias! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, sit non accusantium quaerat ducimus vitae officia dolores voluptatibus ad impedit voluptatem minima fugit molestiae nihil provident sunt temporibus possimus sed.
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details-spec-sc">
+                    <div class="product-details-title">
+                        <i class="icon icon-asterisk"></i>
+                        <div class="product-details-title-text"> PRODUCT SPECIFICATIONS </div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, facilis, nulla corporis sequi velit molestiae nihil incidunt sunt laboriosam laudantium qui non veritatis illo aliquam ipsum animi recusandae in nam.</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, alias, error, magnam dolorum aperiam nulla sunt aspernatur corporis cupiditate facilis nemo provident modi ipsam obcaecati ad optio ea delectus quibusdam.</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                    <div class="product-details-spec-item">
+                        <div class="product-details-spec-label"><span>Specification Label</span></div>
+                        <div class="product-details-spec-value"><span>Specifications value</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="clearfix"></div>
     </div>
 
@@ -148,7 +239,10 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
         <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/bootstrap/js/bootstrap-tooltip.js"></script>
+        <script src="bower_components/bootstrap/js/bootstrap-popover.js"></script>
         <script src="scripts/jquery.icheck.js"></script>
+        <script src="scripts/infobubble.js"></script>
         <script src="scripts/markerclusterer.js"></script>
         <script src="scripts/fontawesome-markers.js"></script>
         <script src="scripts/bows.js"></script>

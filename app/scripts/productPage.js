@@ -44,9 +44,9 @@ var productController = ( function(){
                 mapInstance.setCenter( results[0].geometry.location );
                 mapInstance.fitBounds( results[0].geometry.viewport );
             }
+            getData();
         });
         log( messages.mapLoad );
-        getData();
     }
 
     function renderMap( data ) {
@@ -59,66 +59,57 @@ var productController = ( function(){
         mainData.getProductObject( 1, initializeProductHandler );
     }
 
-    function getFilters() {
-        var filterHandler = new YFilter( settings.filterDataUrl );
-        $( 'body' ).bind( 'YFilterReady', function() {
-            var html = filterHandler.getHtml();
-
-            $( '.search-filter-item-sc' ).prepend( html );
-
-            $( 'input' ).iCheck({
-                checkboxClass: 'icheckbox_flat-red',
-                radioClass: 'iradio_flat-red'
-            });
-
-            $( '.search-filter-item-sc' ).slideDown( 'slow' );
-
-            $( '.more-filter-item-list' ).on( "click", function() {
-                var html = $( this ).find( '.more-filter-item-options' ).html();
-                $( '.more-filter-option-container-inner' ).html( html );
-            });
-
-            $( '.filter-item' ).on( 'click', function() {
-                $( '.filter-item' ).not(this).removeClass( 'selected' ).find( '.filter-item-list' ).slideUp( 'fast' );
-                $( this ).toggleClass( 'selected' );
-                $( this ).find( '.filter-item-list' ).slideToggle( 'fast' );
-            });
-
-            $( '.filter-item-list' ).on( 'click', function( event ) {
-                log( 'detected click' );
-                event.stopPropagation();
-            });
-
-            $( '.product-store-inner' ).slimScroll({
-                height: '100%'
-            });
-
-        });
-    }
 
     function initializeProductHandler( data ) {
         productHandler = new YStores();
         var renderData = {};
         renderData.stores = data.stores;
+        renderMap( renderData.stores );
         productHandler.getHtml( renderData, renderProducts );
     }
 
     function renderProducts( html ) {
-        $( '.product-store-inner' ).html( html );
+        $( '.section-inStock .section-store-container' ).html( html );
+        $( '.section-outStock .section-store-container' ).html( html );
+        $( '.section-store-container' ).slimScroll({
+            height: '97%'
+        });
+        $( '.section-outStock .section-title' ).on( 'click', function() {
+            log( "detected click on store text" );
+            $( this ).parent().toggleClass( 'collapse' );
+            $( this ).parent().find( '.section-store-container' ).slideToggle( 'fast' );
+            $( this ).find( '.icon-chevron-right' ).toggle();
+            $( this ).find( '.icon-chevron-down' ).toggle();
+            $( '.section-inStock' ).click();
+
+        });
+        $( '.section-inStock .section-title' ).on( 'click', function() {
+            log( "detected click on store text" );
+            $( this ).parent().toggleClass( 'collapse' );
+            $( this ).parent().find( '.section-store-container' ).slideToggle( 'fast' );
+            $( this ).find( '.icon-chevron-right' ).toggle();
+            $( this ).find( '.icon-chevron-down' ).toggle();
+            $( '.section-outStock' ).click();
+        });
+        $( '.section-inStock .section-title' ).click();
+
     }
+
+    function bindEvents() {
+
+    }
+
 
     /**
      * initialize the search view Controller
      */
     function init() {
         initializeMap();
-        getFilters();
     }
 
     return {
         init : init
     };
-
 })();
 
 

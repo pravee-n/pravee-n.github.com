@@ -459,24 +459,21 @@ a {
     margin: 0;
     // overflow: hidden;
     .lnd-logo-container {
-        .beta;
+        .delta;
         .sans;
         float: left;
         margin-bottom: 0;
-        width: 10%;
         span {
             color: @black-80;
         }
         .icon {
             float: left;
-            .border-radius(50%);
+            .border-radius( 50% );
             background: @brand-primary;
             color: white;
-            margin-top: -5px;
+            padding: 5px;
+            margin-top: -3px;
             margin-right: 10px;
-            padding: 10px;
-            display: block;
-            overflow: hidden;
         }
     }
     .lnd-menu {
@@ -486,7 +483,6 @@ a {
         overflow: hidden;
         float: right;
         list-style: none;
-        margin-top: 10px;
         .lnd-menu-item {
             display: inline;
             padding-right: 20px;
@@ -642,6 +638,8 @@ a {
     padding: 10px 2%;
     width: 96%;
     overflow: hidden;
+    border-top: 2px solid @black-50;
+    margin-top: 20px;
     .lnd-footer-inner {
         .delta;
         list-style: none;
@@ -664,32 +662,14 @@ a {
             }
         }
     }
+    &.modLanding {
+        position: fixed;
+        top: 90%;
+        height: 10%;
+        border: none;
+    }
 }
 // -------------------------------------
 // FOOTER CSS ENDS
 // -------------------------------------
 
-
-      .phoney {
-        background: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgb(112,112,112)),color-stop(0.51, rgb(94,94,94)),color-stop(0.52, rgb(57,57,57)));
-        background: -moz-linear-gradient(center top,rgb(112,112,112) 0%,rgb(94,94,94) 51%,rgb(57,57,57) 52%);
-      }
-
-      .phoneytext {
-        text-shadow: 0 -1px 0 #000;
-        color: #fff;
-        font-family: Helvetica Neue, Helvetica, arial;
-        font-size: 18px;
-        line-height: 25px;
-        padding: 4px 45px 4px 15px;
-        font-weight: bold;
-        background: url(../images/arrow.png) 95% 50% no-repeat;
-      }
-
-      .phoneytab {
-        text-shadow: 0 -1px 0 #000;
-        color: #fff;
-        font-family: Helvetica Neue, Helvetica, arial;
-        font-size: 18px;
-        background: rgb(112,112,112) !important;
-      }
