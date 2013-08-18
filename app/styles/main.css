@@ -7067,6 +7067,7 @@ body {
   display: block;
   overflow: hidden;
   position: relative;
+  border-top: 1px solid #333333;
 }
 .product-sc .product-main-sc {
   overflow: hidden;
@@ -7081,13 +7082,19 @@ body {
   overflow: hidden;
   position: relative;
   height: 100%;
-  box-shadow: 1px 2px 3px #4d4d4d;
   z-index: 99;
+  box-shadow: 1px 2px 3px #4d4d4d;
 }
 .product-sc .product-store-sc .product-store-inner {
   overflow: hidden;
   position: relative;
   height: 100%;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-preview .product-store-image {
+  width: 100%;
+}
+.product-sc .product-store-sc .product-store-inner .product-store-preview .product-store-image img {
+  width: 100%;
 }
 .product-sc .product-store-sc .product-store-inner .product-store-section {
   overflow: hidden;
@@ -7183,7 +7190,6 @@ body {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #f1f1f1;
 }
 .product-info-main .product-info-inner {
   padding: 10px 5px;
@@ -7258,7 +7264,7 @@ body {
   text-align: center;
   cursor: pointer;
   background: #4d4d4d;
-  width: 100px;
+  width: 150px;
   padding: 8px 10px;
 }
 .product-info-main .product-info-inner .product-info-right .product-more-details-container .product-more-details-button:hover {
@@ -7406,4 +7412,192 @@ body {
   font-weight: 400;
   padding-left: 4%;
   border-left: 1px solid #999999;
+}
+.product-map-sc {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 80%;
+  float: none;
+  margin: 0 auto;
+}
+.product-map-sc #map-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.product-map-sc .product-map-container {
+  width: 100%;
+  float: right;
+  margin: 0 auto;
+  height: 94%;
+  overflow: hidden;
+  position: relative;
+}
+.product-map-sc .product-map-container .map-control-bar {
+  top: 60px;
+}
+.product-map-sc #product-map-canvas {
+  width: 100%;
+  float: right;
+  height: 100%;
+}
+.product-map-sc .product-filter-sc {
+  width: 100%;
+  background: #f1f1f1;
+  position: relative;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  padding: 5px 0;
+  z-index: 10;
+  display: block;
+}
+.product-map-sc .product-filter-sc .search-filter-inner {
+  position: relative;
+  padding: 0 5px;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main {
+  position: relative;
+  overflow: visible;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-label {
+  font-size: 24px;
+  font-size: 1.3333333333333333rem;
+  margin-bottom: 1.2375rem;
+  padding: 5px 0;
+  float: left;
+  width: 19.7%;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  word-spacing: 3px;
+  border-right: 1px solid #cccccc;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-collapse {
+  float: left;
+  clear: both;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc {
+  position: relative;
+  float: left;
+  width: 80%;
+  display: none;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item {
+  font-size: 24px;
+  font-size: 1.3333333333333333rem;
+  margin-bottom: 1.2375rem;
+  width: 18.5%;
+  margin: 0 0 0 1.5%;
+  float: left;
+  border: 1px solid #cccccc;
+  position: relative;
+  background: white;
+  cursor: pointer;
+  padding: 5px 0;
+  border-radius: 3px;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item.selected {
+  background: white;
+  border-radius: 0;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-status {
+  color: #5cb85c;
+  display: none;
+  float: left;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-label {
+  float: left;
+  color: #4d4d4d;
+  text-align: left;
+  padding-left: 5px;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-dropdown {
+  float: right;
+  padding-right: 10px;
+  color: #e6e6e6;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list {
+  display: none;
+  width: 95%;
+  left: -1px;
+  position: absolute;
+  top: 29px;
+  background: white;
+  padding: 10px 2.5%;
+  overflow: hidden;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border: 1px solid #cccccc;
+  border-top: none;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .filter-item-list-item {
+  float: left;
+  overflow: hidden;
+  padding: 10px 0;
+  width: 100%;
+  border-bottom: 1px dotted #cccccc;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .filter-item-list-item .icheckbox_flat-red {
+  float: left;
+  margin-right: 10px;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .filter-item-list-item label {
+  cursor: pointer;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list.more-filter-dropdown {
+  width: 397%;
+  left: -301.9%;
+  overflow: hidden;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container {
+  width: 60%;
+  overflow: hidden;
+  float: left;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list {
+  width: 45%;
+  margin: 10px 2.5%;
+  float: left;
+  background: #f1f1f1;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list.selected {
+  background: #e95a5a;
+  color: white;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list .more-filter-item-inner {
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list .more-filter-item-inner .more-filter-item-name {
+  float: left;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list .more-filter-item-inner i {
+  float: right;
+  color: #cccccc;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-label-container .more-filter-item-list .more-filter-item-options {
+  display: none;
+  overflow: hidden;
+  float: left;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-option-container {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  width: 40%;
+  height: 100%;
+}
+.product-map-sc .product-filter-sc .search-filter-inner .search-filter-main .search-filter-item-sc .filter-item .filter-item-list .more-filter-option-container .more-filter-option-container-inner {
+  padding: 0 10px;
+  border-left: 1px solid #cccccc;
+  overflow: hidden;
 }

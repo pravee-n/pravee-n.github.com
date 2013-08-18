@@ -368,11 +368,11 @@ var FillMap = function( map, data ) {
             icon: {
                 path: fontawesome.markers.CIRCLE,
                 scale: 0.012,
-                strokeWeight: 0,
+                strokeWeight: 2,
                 strokeColor: '#ffc000',
                 strokeOpacity: 1,
                 fillColor: '#fbff9a',
-                fillOpacity: 1,
+                fillOpacity: 0.55,
                 rotation: 180
             }
         };

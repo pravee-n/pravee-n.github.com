@@ -2,6 +2,7 @@
     display: block;
     overflow: hidden;
     position: relative;
+    border-top: 1px solid @black-80;
     .product-main-sc {
         overflow: hidden;
         position: relative;
@@ -15,12 +16,20 @@
         overflow: hidden;
         position: relative;
         height: 100%;
-        box-shadow: 1px 2px 3px @black-70;
         z-index: 99;
+        box-shadow: 1px 2px 3px @black-70;
         .product-store-inner {
             overflow: hidden;
             position: relative;
             height: 100%;
+            .product-store-preview {
+                .product-store-image {
+                    width: 100%;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
             .product-store-section {
                 overflow: hidden;
                 position: relative;
@@ -118,7 +127,6 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    background: @ivory;
     .product-info-inner {
         padding: 10px 5px;
         overflow: hidden;
@@ -167,7 +175,7 @@
                 .product-more-details-button {
                     .flat-button;
                     background: @black-70;
-                    width: 100px;
+                    width: 150px;
                     padding: 8px 10px;
                 }
             }
@@ -308,5 +316,32 @@
                 }
             }
         }
+    }
+}
+
+.product-map-sc {
+    .search-map-sc;
+    width: 80%;
+    float: none;
+    margin: 0 auto;
+    .product-map-container {
+        width: 100%;
+        float: right;
+        margin: 0 auto;
+        height: 94%;
+        overflow: hidden;
+        position: relative;
+        .map-control-bar {
+            top: 60px;
+        }
+    }
+    #product-map-canvas {
+        width: 100%;
+        float: right;
+        height: 100%;
+    }
+    .product-filter-sc {
+        .search-sc .search-filter-sc;
+        display: block;
     }
 }

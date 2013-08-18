@@ -274,6 +274,7 @@ var landingController = ( function(){
         infoBubble.position = location;
         infoBubble.open( mapInstance );
         marker.setPosition( location );
+        currentUserLocation = location;
     }
 
 

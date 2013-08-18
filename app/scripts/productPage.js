@@ -18,7 +18,7 @@ var productController = ( function(){
             stylers: [ { visibility: 'on' }, { saturation: -70 }, { gamma: 1.20 } ]
         }],
         mapCenterAddress : 'India Gate, New Delhi',
-        mapContainer     : 'map-canvas',
+        mapContainer     : 'product-map-canvas',
         filterDataUrl    : '/scripts/filter.json'
     };
 
@@ -54,6 +54,51 @@ var productController = ( function(){
         fillMapController = new FillMap( mapInstance, data );
     }
 
+    /**
+     * Get the filers for the current search
+     */
+    function getFilters() {
+        var filterHandler = new YFilter( settings.filterDataUrl );
+        $( 'body' ).bind( 'YFilterReady', function() {
+            var html = filterHandler.getHtml();
+
+            $( '.search-filter-item-sc' ).prepend( html );
+
+            $( 'input' ).iCheck({
+                checkboxClass: 'icheckbox_flat-red',
+                radioClass: 'iradio_flat-red'
+            });
+
+            $( '.search-filter-item-sc' ).slideDown( 'slow' );
+
+            $( '.more-filter-item-list' ).on( "click", function() {
+                var html = $( this ).find( '.more-filter-item-options' ).html();
+                $( '.more-filter-option-container-inner' ).html( html );
+            });
+
+            $( '.filter-item' ).on( 'mouseenter', function() {
+                $( '.filter-item' ).not(this).removeClass( 'selected' ).find( '.filter-item-list' ).slideUp( 'fast' );
+                $( this ).addClass( 'selected' );
+                $( this ).find( '.filter-item-list' ).slideDown( 'fast' );
+            });
+
+            $( '.filter-item' ).on( 'mouseleave', function() {
+                $( '.filter-item' ).not(this).removeClass( 'selected' ).find( '.filter-item-list' ).slideUp( 'fast' );
+                $( this ).removeClass( 'selected' );
+                $( this ).find( '.filter-item-list' ).slideUp( 'fast' );
+            });
+
+            $( '.filter-item-list' ).on( 'click', function( event ) {
+                log( 'detected click' );
+                event.stopPropagation();
+            });
+
+            $( '.search-product-inner' ).slimScroll({
+                height: '100%'
+            });
+
+        });
+    }
 
     function getData() {
         mainData.getProductObject( 1, initializeProductHandler );
@@ -92,6 +137,7 @@ var productController = ( function(){
             $( '.section-outStock' ).click();
         });
         $( '.section-inStock .section-title' ).click();
+        getFilters();
 
     }
 
