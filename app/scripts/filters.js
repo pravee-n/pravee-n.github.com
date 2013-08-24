@@ -1,10 +1,27 @@
+/**
+ * Module responsible for handling filters.
+ * Based on the given data, the module combines various templates
+ * of the filter to generate the final HTML.
+ */
 var YFilter = function( url ) {
 
-    var hasData, processedData, queueData, queuedCallback, rawData, templateList, generatedHtml;
+    // Declaring all the variables to be used by this module.
+    var hasData,
+        processedData,
+        queueData,
+        queuedCallback,
+        rawData,
+        templateList,
+        generatedHtml;
+
     processedData = {};
     var log = bows( 'filter' );
     var self = this;
 
+    /**
+     * settings object
+     * @type {Object}
+     */
     var settings = {
         dataUrl   : 'scripts/filter.json',
         templates : {
@@ -19,22 +36,24 @@ var YFilter = function( url ) {
         }
     };
 
-
-
+    /**
+     * Logging messages for this module
+     * @type {Object}
+     */
     var messages = {
-        fetchedData   : 'Received data from the server',
-        noRawData     : 'No raw data exists',
-        dataProcessed : 'Processed Data',
-        url           : 'No URL provided while initialization. Resorting to the default URL',
-        noFilterType  : 'Filter type not specified for filter ',
+        fetchedData      : 'Received data from the server',
+        noRawData        : 'No raw data exists',
+        dataProcessed    : 'Processed Data',
+        url              : 'No URL provided while initialization. Resorting to the default URL',
+        noFilterType     : 'Filter type not specified for filter ',
         noFilterTemplate : 'No filter template found for the filter type '
     };
-
 
     /**
      * retreive data from the server.
      */
     function retreiveData() {
+
         $.getJSON( settings.dataUrl, function( data ) {
             hasData = true;
             rawData = data;
@@ -43,6 +62,9 @@ var YFilter = function( url ) {
         });
     }
 
+    /**
+     * Preload all the filter templates
+     */
     function preLoadTemplates() {
         log( 'precompiledTemplate' );
         var templatesLength = Object.keys( templateList ).length;
@@ -67,6 +89,9 @@ var YFilter = function( url ) {
         }
     }
 
+    /**
+     * generate the more filter box
+     */
     function generateMoreFilterBox() {
         var template = templateList.moreFilter;
         var secondaryFilters = rawData.secondary;
@@ -77,14 +102,13 @@ var YFilter = function( url ) {
         $( 'body' ).trigger( 'YFilterReady' );
     }
 
-
-
-
+    /**
+     * generate Filter bar
+     */
     function generateFilterBar() {
         var primaryFilters = rawData.primary;
         var filterBarHtml = '';
         for ( var primaryIndex in primaryFilters ) {
-            log( primaryIndex );
             var filter = primaryFilters[ primaryIndex ];
             if ( filter.hasOwnProperty( 'type' ) ) {
                 if ( templateList.hasOwnProperty( filter.type ) ) {
@@ -104,16 +128,23 @@ var YFilter = function( url ) {
         generateMoreFilterBox();
     }
 
-
+    /**
+     * initialize generation of HTML
+     */
     function generateFilterHtml() {
         log( 'generateFilterHtml' );
         generateFilterBar();
     }
 
+    /**
+     * PUBLIC
+     *
+     * Returns the final HTML.
+     * @return {String} Final HTML
+     */
     function getHtml() {
         return generatedHtml;
     }
-
 
     (function init() {
         if ( url ) {

@@ -1,0 +1,20 @@
+{{#each products}}
+    <div class="search-product-expanded-item js-product-expanded-item" data-id="{{id}}">
+        <div class="search-product-expanded-item-inner">
+            <div class="product-info js-product-info">
+                <div class="product-image">
+                    <img src="http://placeimg.com/197/197/tech" alt="{{name}} image">
+                </div>
+                <div class="product-info-bottom">
+                    <div class="product-info-left">
+                        <div class="product-name">{{name}}</div>
+                        <div class="product-brand">{{brand}}</div>
+                    </div>
+                    <div class="product-info-right">
+                        <div class="product-price"><i class="icon-inr"></i> {{price}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}

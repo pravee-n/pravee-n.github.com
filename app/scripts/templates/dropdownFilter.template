@@ -1,14 +1,14 @@
-<div class="filter-item">
-    <div class="filter-item-status">
+<div class="filter-item js-filter-item">
+    <div class="filter-item-status js-filter-item-status">
         <i class="icon-ok"></i>
     </div>
     <div class="filter-item-label">
         {{name}}
     </div>
-    <div class="filter-item-dropdown">
+    <div class="filter-item-dropdown js-filter-item-dropdown-icon">
         <i class="icon-chevron-down"></i>
     </div>
-    <div class="filter-item-list">
+    <div class="filter-item-list js-filter-item-dropdown">
         {{#each subItems}}
         <div class="filter-item-list-item">
             <input type="checkbox" name="{{this}}" id="{{this}}" checked>

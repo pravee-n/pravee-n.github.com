@@ -188,9 +188,6 @@ var landingController = ( function(){
         setTimeout( startAnimation, 5000);
     }
 
-
-
-
     function getInfoBubbleSettings() {
 
         return {
@@ -233,8 +230,6 @@ var landingController = ( function(){
         };
     }
 
-
-
     function setMapCenter( userLocation ) {
         var location = new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude );
         currentUserLocation = location;
@@ -276,7 +271,6 @@ var landingController = ( function(){
         marker.setPosition( location );
         currentUserLocation = location;
     }
-
 
     function bindEvents() {
         $( '.lnd-location-button' ).on( 'click', function() {

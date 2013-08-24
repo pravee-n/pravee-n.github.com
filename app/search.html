@@ -67,10 +67,37 @@
         <div class="search-filter-sc">
             <div class="search-filter-inner">
                 <div class="search-filter-main">
-                    <div class="search-filter-label">
-                        <span>REFINE SEARCH BY</span>
+                    <div class="search-filter-category">
+                        <div class="category-label">CATEGORY</div>
+                        <div class="filter-item js-filter-item">
+                            <div class="filter-item-label">
+                                Chose Category
+                            </div>
+                            <div class="filter-item-dropdown js-filter-item-dropdown-icon">
+                                <i class="icon-chevron-down"></i>
+                            </div>
+                            <div class="filter-item-list js-filter-item-dropdown">
+                                <div class="filter-item-list-item">
+                                    <label for="{{this}}">Electronics</label>
+                                </div>
+                                <div class="filter-item-list-item">
+                                    <label for="{{this}}">Books</label>
+                                </div>
+                                <div class="filter-item-list-item">
+                                    <label for="{{this}}">Apparrel</label>
+                                </div>
+                                <div class="filter-item-list-item">
+                                    <label for="{{this}}">Grocery</label>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    <div class="search-filter-item-sc">
+                    <div class="search-filter-label">
+                        FILTER RESULTS BY
+                    </div>
+                    <div class="search-filter-item-sc js-search-filter-item-container">
                     </div>
                     <div class="search-filter-collapse">
                     <div class="clearfix"></div>
@@ -81,11 +108,68 @@
             </div>
             <div class="clearfix"></div>
         </div>
+
+        <!-- MAIN CONTAINER STARTS -->
         <div class="search-main-sc">
-            <div class="search-product-sc">
-                <!-- NEED TO ADD PRODUCT CONTAINER HERE -->
-                <div class="search-product-inner"></div>
+
+            <!-- SIDEBAR CONTAINER STARTS -->
+            <div class="search-product-sc js-products-container">
+
+                <div class="search-product-menu">
+                    <div class="search-product-menu-item selected js-product-menu-item-products">
+                        <div class="menu-item-icon">
+                            <i class="icon-tag"></i>
+                        </div>
+                        <div class="menu-item-title">
+                            Products
+                        </div>
+                        <div class="menu-item-count"></div>
+                        <div class="menu-item-arrow-container arrow_box"></div>
+                    </div>
+                    <div class="search-product-menu-item item-last js-product-menu-item-shortlist">
+                        <div class="menu-item-icon">
+                            <i class="icon-bookmark"></i>
+                        </div>
+                        <div class="menu-item-title">
+                            Shortlist
+                        </div>
+                        <div class="menu-item-count shortlist-count js-shortlist-value arrow_box_left"></div>
+                        <div class="menu-item-arrow-container arrow_box"></div>
+                    </div>
+                </div>
+
+
+                <div class="search-product-shortlist-items js-product-list-shortlisted"></div>
+                <!-- shortlist container ends -->
+
+                <!-- expanded floating button starts -->
+                <div class="search-expand-container js-product-block-expand">
+                    <div class="active">
+                        <i class="icon-double-angle-right"></i>
+                    </div>
+                    <div class="non-active">
+                        <i class="icon-double-angle-left"></i>
+                    </div>
+                </div>
+                <!-- expanded floating button ends -->
+
+
+                <!-- collased items container starts -->
+                <div class="search-product-inner js-product-list-collapsed">
+                </div>
+                <!-- collased items container ends-->
+
+                <!-- expanded items container starts -->
+                <div class="search-product-expanded js-product-list-expanded">
+                    <i class="icon-spinner icon-spin"></i>
+                    <div class="text"> Loading </div>
+                </div>
+                <!-- expanded items container ends -->
+
             </div>
+            <!-- SIDEBAR CONTAINER ENDS -->
+
+            <!-- MAP CONTAINER ENDS -->
             <div class="search-map-sc js-map-container">
                 <div class="search-info-sc js-store-info-main">
                 </div>
@@ -103,7 +187,9 @@
                 </div>
                 <div id="map-canvas" class="js-map-canvas"></div>
             </div>
+            <!-- MAP CONTAINER ENDS -->
         </div>
+        <!-- MAIN CONTAINER ENDS -->
         <div class="clearfix"></div>
     </div>
 

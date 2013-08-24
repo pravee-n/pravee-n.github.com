@@ -1,15 +1,15 @@
 
-<div class="filter-item">
-    <div class="filter-item-status">
+<div class="filter-item js-filter-item">
+    <div class="filter-item-status js-filter-item-status">
         <i class="icon-ok"></i>
     </div>
     <div class="filter-item-label">
         More Filters
     </div>
-    <div class="filter-item-dropdown">
+    <div class="filter-item-dropdown js-filter-item-dropdown-icon">
         <i class="icon-plus"></i>
     </div>
-    <div class="filter-item-list more-filter-dropdown">
+    <div class="filter-item-list more-filter-dropdown js-filter-item-dropdown js-more-filter-item-dropdown">
         <div class="more-filter-label-container">
             {{#each data}}
                 <div class="more-filter-item-list">

@@ -1,32 +1,126 @@
-var EYS = {};
+var EYS = (function() {
+    var currentLocation,
+        currentActiveProduct,
+        currentActiceStore;
 
+    var log = bows( 'EYS' );
+
+    function setCurrentLocation( lattitude, longitude ) {
+
+    }
+
+    function getCurrentLocation(){
+
+    }
+
+    function setActiveProduct( id ){
+        if( id ) {
+            log( 'acive product changed to #' + id );
+            currentActiveProduct = id;
+        } else {
+            log( 'requested to set active product but no id provided' );
+        }
+    }
+
+    function getActiveProduct(){
+        if( currentActiveProduct ) {
+            return currentActiveProduct;
+        } else {
+            log( "current product not set " );
+            return false;
+        }
+
+    }
+
+    function setActiveStore(){
+
+    }
+
+    function getActiveStore(){
+
+    }
+
+    return {
+        setCurrentLocation : setCurrentLocation,
+        getCurrentLocation : getCurrentLocation,
+        setActiveProduct   : setActiveProduct,
+        getActiveProduct   : getActiveProduct,
+        setActiveStore     : setActiveStore,
+        getActiveStore     : setActiveStore
+    };
+
+
+})();
 
 
 /**
- * Modules responsible for handling the logic of shortlist. Provides basic add, remove and fetch list functionality.
- * @return {[type]} [description]
+ * @Singleton
+ *
+ * Modules responsible for handling the logic of shortlist.
+ * Provides basic add, remove and fetch list functionality.
  */
 var YShortlist = (function() {
 
-    var shortlistedItems;
-    shortlistedItems = [];
+    var shortlistedItems, currentPointer;
+    var count = 0;
+    var shortlistedItems = [];
+
+    var log = bows( 'YShortlist' );
 
     /**
      * Storing all dom access selectors here
      * @type Object
      */
     var dom = {
-        shortlistValue : '.js-shortlist-value'
+        shortlistValue : '.js-shortlist-value',
+        shortlistContainer : '.js-product-list-shortlisted'
     };
-
 
     /**
      * Add a pointer to the shortlist
      * @param {Google maps pointer} pointer Google maps pointer object
      */
     function add( pointer ) {
-        shortlistedItems.push( pointer );
+        log( 'addding item to the shortlist' );
         pointer.isShortlist = true;
+
+        pointer.shortlistProductId = EYS.getActiveProduct();
+        currentPointer = pointer;
+        count++;
+        $( dom.shortlistValue ).text( count );
+        if ( pointer.shortlistProductId ) {
+            mainData.getProductObject( pointer.shortlistProductId, savePointer );
+        } else {
+            savePointer();
+        }
+    }
+
+    function savePointer( productObject ) {
+        if ( productObject ) {
+            currentPointer.shortlistProductName = productObject.name;
+        }
+
+        shortlistedItems.push( currentPointer );
+    }
+
+    /**
+     * Remove a pointer from the shortlisted items
+     * @param  {Google Maps Pointer} pointer Google maps pointer to be removed
+     */
+    function remove( pointer ) {
+        log( 'Requested to remove item from shortlist' );
+        var id = pointer.YId;
+        for( var index in shortlistedItems ) {
+            var pointer = shortlistedItems[ index ];
+            if( pointer.YId === id ) {
+                shortlistedItems.splice( index, 1 );
+                pointer.isShortlist = false;
+                count--;
+                $( dom.shortlistValue ).text( count );
+                log( 'Item found and removed from shortlisted items' );
+                break;
+            }
+        }
     }
 
     /**
@@ -34,19 +128,20 @@ var YShortlist = (function() {
      * @return {Array} Array of pointers in the shortlist
      */
     function getList(){
+        log( 'requested list of shortlisted items' );
         return shortlistedItems;
     }
 
     return {
         add     : add,
-        getList : getList
+        getList : getList,
+        remove  : remove
     };
 })();
 
 /**
  * ---------- END OF SHORTLIST MODULE ---------------
  */
-
 
 /**
  * Module responsible for handling all the actions related to the info
@@ -110,16 +205,16 @@ var infoContainerHandler = function( map ) {
      * @param  {HTML5 geolocation } userPosition current user position
      */
     function update( pointer, userPosition ) {
-
         if ( pointer && userPosition ) {
             currentPointer = pointer;
             currentUserPosition = userPosition;
             currentStoreInfoObject = {
-                name    : pointer.YName,
-                address : pointer.YAddress,
-                phone   : pointer.YPhone,
-                image   : pointer.YPicture,
-                price   : pointer.YPrice
+                name        : pointer.YName,
+                address     : pointer.YAddress,
+                phone       : pointer.YPhone,
+                image       : pointer.YPicture,
+                price       : pointer.YPrice,
+                isShortlist : pointer.isShortlist
             };
             getDirections();
         } else {
@@ -138,9 +233,9 @@ var infoContainerHandler = function( map ) {
             mapInstance = map;
             preLoadTemplate();
             directionsDisplay = new google.maps.DirectionsRenderer({
-                suppressMarkers  : true,
+                suppressMarkers     : true,
                 suppressInfoWindows : true,
-                preserveViewport : false
+                preserveViewport    : false
             });
 
         } else {
@@ -148,30 +243,34 @@ var infoContainerHandler = function( map ) {
         }
     })();
 
-
     /**
      * preload and compile the info box template
      */
     function preLoadTemplate() {
         $.ajax({
-            type     : "GET",
-            url      : settings.template,
-            success  : function( template ) {
+            type : "GET",
+            url : settings.template,
+            success : function( template ) {
                 compiledTemplate = Handlebars.compile( template );
                 isCompiled = true;
             }
         });
     }
 
-
     /**
      * bind various events pertaining to the info box
      */
     function eventBinders() {
         $( dom.shortlistAction ).on( 'click', function() {
-            YShortlist.add( currentPointer );
-            $( this ).addClass( 'selected' );
-            $( dom.shortlistActionIcon ).removeClass( 'icon-bookmark-empty' ).addClass( 'icon-bookmark' );
+            if( !$( this ).hasClass( 'selected') ) {
+                YShortlist.add( currentPointer );
+                $( this ).addClass( 'selected' );
+                $( dom.shortlistActionIcon ).removeClass( 'icon-bookmark-empty' ).addClass( 'icon-bookmark' );
+            } else {
+                YShortlist.remove( currentPointer );
+                $( this ).removeClass( 'selected' );
+                $( dom.shortlistActionIcon ).addClass( 'icon-bookmark-empty' ).removeClass( 'icon-bookmark' );
+            }
         });
 
         $( dom.storeExpand ).on( 'click', function() {
@@ -186,7 +285,6 @@ var infoContainerHandler = function( map ) {
             $( dom.mainContainer ).slideUp( 'fast' );
         });
     }
-
 
     /**
      * get directions between two points
@@ -205,7 +303,6 @@ var infoContainerHandler = function( map ) {
         var directionService = new google.maps.DirectionsService();
         directionService.route( directionsObject, directionHandler );
     }
-
 
     /**
      * Simply clear the currently visible directions.
@@ -226,7 +323,6 @@ var infoContainerHandler = function( map ) {
         renderTemplate();
     }
 
-
     /**
      * Show directions on the map
      */
@@ -237,12 +333,10 @@ var infoContainerHandler = function( map ) {
         directionsDisplay.setDirections( currentStoreInfoObject.directionResponse );
     }
 
-
     /**
      * Finally inserts the info box and shows it with the animation.
      */
     function renderTemplate() {
-        log( currentStoreInfoObject );
         var html = compiledTemplate( currentStoreInfoObject );
         $( dom.mainContainer ).html( html );
         $( dom.mainContainer ).slideDown( 'fast' );
@@ -258,8 +352,9 @@ var infoContainerHandler = function( map ) {
  * ---------- END OF INFO CONTAINER MODULE ---------------
  */
 
-
-
+/**
+ * Code address, code location and other location helper functions.
+ */
 var locationModule = function() {
     var geocoder, currentLocation;
 
@@ -271,14 +366,14 @@ var locationModule = function() {
      */
 
     var messages = {
-        codeAddress : 'Request received for coding address',
-        codePosition : 'Request received for coding co-ordinates',
-        noAddress: 'No address provided',
-        noCallback : 'No callback provided',
-        currentLocation : 'Request received for current location',
-        noCurrentLocation : 'HTML5 geolocation is not available',
+        codeAddress           : 'Request received for coding address',
+        codePosition          : 'Request received for coding co-ordinates',
+        noAddress             : 'No address provided',
+        noCallback            : 'No callback provided',
+        currentLocation       : 'Request received for current location',
+        noCurrentLocation     : 'HTML5 geolocation is not available',
         updateCurrentLocation : 'Requested to update current location',
-        geocodeNotAvailable : 'Google geocode service is not available'
+        geocodeNotAvailable   : 'Google geocode service is not available'
     };
 
     /**
@@ -374,7 +469,9 @@ var locationModule = function() {
         detectLocation     : detectLocation
     };
 };
-
+/**
+ * ---------- END OF INFO LOCATION MODULE ---------------
+ */
 
 $(document).ready(function(){
   $( 'input' ).iCheck({

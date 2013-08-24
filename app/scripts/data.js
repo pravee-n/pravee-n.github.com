@@ -1,7 +1,14 @@
+/**
+ * @SINGLETON
+ *
+ * Main module responsible for handling all the data.
+ *
+ */
 var mainData = ( function() {
 
     var hasData, processedData, queueData, queuedCallback, rawData;
     processedData = {};
+
     var log = bows( 'data' );
 
     var messages = {
@@ -12,7 +19,6 @@ var mainData = ( function() {
         noProductId             : 'No product id',
         noCallback              : 'Requested data but no callback provided'
     };
-
 
     var settings = {
         dataUrl : 'scripts/data.json'
@@ -29,7 +35,6 @@ var mainData = ( function() {
             log( messages.fetchedData );
         });
     }
-
 
     /**
      * Process raw data and make an array of stores
@@ -68,7 +73,6 @@ var mainData = ( function() {
         }
     }
 
-
     /**
      * Get details and stores of a single product.
      * @param  {String}   id       product ID for which the dat needs to be returned
@@ -82,16 +86,16 @@ var mainData = ( function() {
             var data = rawData.result;
             for( var key in data ){
                 var product = data[ key ];
-                if( product.id === id ) {
+                if( product.id == id ) {
                     productToReturn = product;
                 }
             }
+            log( productToReturn );
             callback( productToReturn );
         } else {
             log( messages.noProductId );
         }
     }
-
 
     /**
      * Get all the stores

@@ -104,7 +104,6 @@ var productController = ( function(){
         mainData.getProductObject( 1, initializeProductHandler );
     }
 
-
     function initializeProductHandler( data ) {
         productHandler = new YStores();
         var renderData = {};
@@ -138,13 +137,10 @@ var productController = ( function(){
         });
         $( '.section-inStock .section-title' ).click();
         getFilters();
-
     }
 
     function bindEvents() {
-
     }
-
 
     /**
      * initialize the search view Controller
