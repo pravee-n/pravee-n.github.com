@@ -8,7 +8,7 @@
         },
         {
             "name": "Price",
-            "type": "multiSelect",
+            "type": "slider",
             "rangeObject" : {
                 "start" : 0,
                 "end"   : 10000,

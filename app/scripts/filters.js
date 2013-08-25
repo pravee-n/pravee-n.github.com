@@ -32,6 +32,10 @@ var YFilter = function( url ) {
             moreFilter : {
                 url        : 'scripts/templates/moreFilter.template',
                 isCompiled : false
+            },
+            slider : {
+                url        : 'scripts/templates/sliderFilter.template',
+                isCompiled : false
             }
         }
     };
@@ -136,6 +140,31 @@ var YFilter = function( url ) {
         generateFilterBar();
     }
 
+
+    function generateSliders(){
+        $( '.js-filter-slider' ).each( function() {
+            var start = $( this ).find( '.js-slider-start').text();
+            var end   = $( this ).find( '.js-slider-end').text();
+            var step  = $( this ).find( '.js-slider-step').text();
+            console.log( start + end + step );
+            start = parseInt( start, 10 );
+            end   = parseInt( end, 10 );
+            step  = parseInt( step, 10 );
+            $( this ).find( '.js-filter-slider-data' ).remove();
+            $( this ).find( '.js-filter-slider-canvas' ).noUiSlider({
+                range   : [ start, end ],
+                start   : 0,
+                step    : step,
+                handles : 1,
+                slide   : function() {
+                    var value = $( this ).val();
+                    $( this ).siblings( '.js-filter-slider-label' ).text( value );
+                }
+            });
+        });
+    }
+
+
     /**
      * PUBLIC
      *
@@ -145,6 +174,13 @@ var YFilter = function( url ) {
     function getHtml() {
         return generatedHtml;
     }
+
+    function activate() {
+        log( 'activating filters' );
+        generateSliders();
+    }
+
+
 
     (function init() {
         if ( url ) {
@@ -158,7 +194,8 @@ var YFilter = function( url ) {
     })();
 
     return {
-        getHtml : getHtml
+        getHtml : getHtml,
+        activate : activate
     };
 
 };

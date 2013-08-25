@@ -1,3 +1,34 @@
+<div class="search-product-expanded-title">
+    <div class="title-text">
+        Select your product
+    </div>
+    <div class="sort-menu">
+        <div class="sort-menu-label">Sort by</div>
+        <div class="filter-item js-filter-item">
+            <div class="filter-item-label">
+                Price
+            </div>
+            <div class="filter-item-dropdown js-filter-item-dropdown-icon">
+                <i class="icon-chevron-down"></i>
+            </div>
+            <div class="clearfix"></div>
+            <div class="filter-item-list js-filter-item-dropdown">
+                <div class="filter-item-list-item">
+                    <label for="{{this}}">Price</label>
+                </div>
+                <div class="filter-item-list-item">
+                    <label for="{{this}}">Discount</label>
+                </div>
+                <div class="filter-item-list-item">
+                    <label for="{{this}}">Availability</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
 {{#each products}}
     <div class="search-product-expanded-item js-product-expanded-item" data-id="{{id}}">
         <div class="search-product-expanded-item-inner">

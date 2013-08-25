@@ -17,6 +17,10 @@ var EYS = (function() {
         if( id ) {
             log( 'acive product changed to #' + id );
             currentActiveProduct = id;
+            $( 'body' ).trigger( {
+                type :'setActiveProduct',
+                id   : id
+            });
         } else {
             log( 'requested to set active product but no id provided' );
         }

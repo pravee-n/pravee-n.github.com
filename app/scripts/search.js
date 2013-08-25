@@ -160,6 +160,7 @@ var searchController = ( function(){
         $( '.js-products-container' ).toggleClass( 'search-product-expanded' );
         $( '.js-product-list-collapsed' ).parent().toggle();
         $( '.js-product-list-expanded' ).toggle();
+        $( '.js-product-menu-container' ).toggle();
     }
 
     /**
@@ -171,8 +172,15 @@ var searchController = ( function(){
             toggleProductList();
         });
 
+        $( 'body' ).on( 'setActiveProduct', function() {
+            var isExpanded = $( '.js-products-container' ).hasClass( 'search-product-expanded' );
+            if ( isExpanded ) {
+                toggleProductList();
+            }
+        });
+
         $( '.js-product-list-expanded, .js-product-list-collapsed' ).slimScroll({
-            height: '100%'
+            height: 'auto'
         });
 
         $( dom.productMenuShortlist ).on( 'click', function() {
@@ -188,6 +196,7 @@ var searchController = ( function(){
             var html = filterHandler.getHtml();
 
             $( dom.filterContainer ).prepend( html );
+            filterHandler.activate();
 
             $( 'input' ).iCheck({
                 checkboxClass: 'icheckbox_flat-red',
@@ -263,8 +272,6 @@ var searchController = ( function(){
         $( dom.collapsedProductsContainer ).show();
         $( dom.shortlistProductsContainer ).hide();
     }
-
-
 
     /**
      * initialize the search view Controller

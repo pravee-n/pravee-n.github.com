@@ -26,10 +26,16 @@ var YProducts = function() {
      * @type {Object}
      */
     var dom = {
-        mainContainer         : '.js-product-item',
-        expandContainer       : '.js-product-expand-container',
-        infoContainer         : '.js-product-info',
-        itemContainerExpanded : '.js-product-expanded-item'
+        mainContainer          : '.js-product-item',
+        expandContainer        : '.js-product-expand-container',
+        infoContainer          : '.js-product-info',
+        itemContainerExpanded  : '.js-product-expanded-item',
+        filterItem             : '.js-filter-item',
+        filterDropdownList     : '.js-filter-item-dropdown',
+        filterDropdownMoreList : '.js-more-filter-item-dropdown',
+        filterDropdownIcon     : '.js-filter-item-dropdown-icon',
+        filterStatus           : '.js-filter-item-status',
+        filterContainer        : '.js-search-filter-item-container',
     };
 
 
@@ -51,8 +57,6 @@ var YProducts = function() {
         preLoadTemplate();
     })();
 
-
-
     /**
      * PUBLIC
      *
@@ -62,22 +66,44 @@ var YProducts = function() {
     function activate() {
 
         $( dom.mainContainer ).on( 'click', function() {
-            $( '.active' ).not( this ).removeClass( 'active' );
-            $( this ).toggleClass( 'active' );
             var id = $( this ).attr( "data-id" );
             EYS.setActiveProduct( id );
         });
 
-        $( dom.infoContainer ).on( 'click', function() {
+        $( 'body' ).on( 'setActiveProduct', function( event ) {
+            var matchedElement = $( dom.mainContainer+'[data-id="' + event.id + '"]');
+            matchedElement.ScrollTo({
+                onlyIfOutside: true
+            });
+            $( '.active' ).not( matchedElement ).removeClass( 'active' );
+            $( matchedElement ).toggleClass( 'active' );
             $( '.active-drawar' ).removeClass( 'active-drawar' );
-            $( this ).siblings( dom.expandContainer ).toggleClass( 'active-drawar' );
-
             $( dom.expandContainer ).not( '.active-drawar' ).slideUp( 'fast' );
+            $( matchedElement ).find( dom.infoContainer ).siblings( dom.expandContainer ).toggleClass( 'active-drawar' );
+            $( matchedElement ).find( dom.infoContainer ).siblings( dom.expandContainer ).slideToggle( 'fast' );
+        });
 
-            $( this ).siblings( dom.expandContainer ).slideToggle( 'fast' );
+        $( dom.filterItem ).on( 'mouseenter', function() {
+            $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).addClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+        });
+
+        $( dom.filterItem ).on( 'mouseleave', function() {
+            $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).removeClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
+        });
+
+        $( dom.filterDropdownList ).on( 'click', function( event ) {
+            event.stopPropagation();
+        });
+
+        $( dom.itemContainerExpanded ).on( 'click', function() {
+            var id = $( this ).attr( 'data-id' );
+            EYS.setActiveProduct( id );
         });
     }
-
 
     /**
      * PUBLIC

@@ -93,11 +93,33 @@ var productController = ( function(){
                 event.stopPropagation();
             });
 
-            $( '.search-product-inner' ).slimScroll({
+            $( '.search-product-inner, .product-details-inner' ).slimScroll({
                 height: '100%'
             });
 
+            $( '.product-store-section' ).slimScroll( {
+                height: '54%'
+            });
+
+            $( '.js-product-more-details-button' ).on( 'click', function() {
+                toggleProductDetails();
+            });
+
+            $( '.js-product-details-close, .js-product-overlay' ).on( 'click', function() {
+                toggleProductDetails();
+            });
+
+            $( '.product-store-menu-item' ).on( 'click', function() {
+                $( '.selected' ).removeClass( "selected" );
+                $( this ).addClass( 'selected' );
+            })
+
         });
+    }
+
+    function toggleProductDetails() {
+        $( '.js-product-details-container' ).toggle();
+        $( '.js-product-overlay' ).toggle();
     }
 
     function getData() {
@@ -113,29 +135,10 @@ var productController = ( function(){
     }
 
     function renderProducts( html ) {
-        $( '.section-inStock .section-store-container' ).html( html );
-        $( '.section-outStock .section-store-container' ).html( html );
-        $( '.section-store-container' ).slimScroll({
-            height: '97%'
-        });
-        $( '.section-outStock .section-title' ).on( 'click', function() {
-            log( "detected click on store text" );
-            $( this ).parent().toggleClass( 'collapse' );
-            $( this ).parent().find( '.section-store-container' ).slideToggle( 'fast' );
-            $( this ).find( '.icon-chevron-right' ).toggle();
-            $( this ).find( '.icon-chevron-down' ).toggle();
-            $( '.section-inStock' ).click();
-
-        });
-        $( '.section-inStock .section-title' ).on( 'click', function() {
-            log( "detected click on store text" );
-            $( this ).parent().toggleClass( 'collapse' );
-            $( this ).parent().find( '.section-store-container' ).slideToggle( 'fast' );
-            $( this ).find( '.icon-chevron-right' ).toggle();
-            $( this ).find( '.icon-chevron-down' ).toggle();
-            $( '.section-outStock' ).click();
-        });
-        $( '.section-inStock .section-title' ).click();
+        $( '.section-status1' ).html( html );
+        $( '.section-status2' ).html( html );
+        $( '.section-status3' ).html( html );
+        $( '.section-status4' ).html( html );
         getFilters();
     }
 
