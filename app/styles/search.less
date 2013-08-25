@@ -226,7 +226,7 @@
         width: 100%;
         // PRODUCT LIST CONTAINER CSS
         .search-product-sc {
-            width: 20%;
+            width: 25%;
             position: absolute;
             left: 0;
             top: 0;
@@ -304,7 +304,7 @@
                                 }
                             }
                             .product-image {
-                                width: 20%;
+                                width: 25%;
                                 float: left;
                                 vertical-align: middle;
                                 text-align: center;
@@ -319,7 +319,7 @@
                                 font-weight: 400;
                                 margin: 0 2.5%;
                                 float: left;
-                                width: 35%;
+                                width: 65%;
                             }
                             .product-price {
                                 .delta;
@@ -332,6 +332,12 @@
                                 float: left;
                                 width: 75%;
                                 margin: 10px 2.5%;
+                            }
+                            .product-details {
+                                width: 70%;
+                                float: left;
+                                margin-left: 5%;
+                                overflow: hidden;
                             }
                         }
                         .product-expand {
@@ -348,7 +354,7 @@
                             }
                             .product-expand-inner {
                                 padding: 10px 0;
-                                background: @offWhite;
+                                background: darken( @offWhite, 10% );
                                 position: relative;
                                 overflow: hidden;
                                 display: block;
@@ -364,13 +370,7 @@
                         }
                     }
                     &.active {
-                        .search-product-item-inner {
-                            .product-info{
-                                .product-selected-icon{
-                                    display: block;
-                                }
-                            }
-                        }
+                        background: @offWhite;
                     }
                 }
                 .search-store-item {
@@ -523,6 +523,7 @@
                     position: relative;
                     border-right: 2px solid lighten( @blue, 20% );
                     cursor: pointer;
+                    text-align: center;
                     &:hover{
                         color: white;
                     }
@@ -631,10 +632,10 @@
 
 
 .search-map-sc {
-    width: 80%;
+    width: 75%;
     overflow: hidden;
     position: absolute;
-    left: 20%;
+    left: 25%;
     top: 0;
     height: 100%;
     #map-canvas {

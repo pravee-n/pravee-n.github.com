@@ -112,7 +112,7 @@ var productController = ( function(){
             $( '.product-store-menu-item' ).on( 'click', function() {
                 $( '.selected' ).removeClass( "selected" );
                 $( this ).addClass( 'selected' );
-            })
+            });
 
         });
     }

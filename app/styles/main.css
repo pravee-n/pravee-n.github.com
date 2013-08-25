@@ -7222,7 +7222,7 @@ body {
   width: 100%;
 }
 .search-sc .search-main-sc .search-product-sc {
-  width: 20%;
+  width: 25%;
   position: absolute;
   left: 0;
   top: 0;
@@ -7306,7 +7306,7 @@ body {
   color: #84cff2;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item .search-product-item-inner .product-info .product-image {
-  width: 20%;
+  width: 25%;
   float: left;
   vertical-align: middle;
   text-align: center;
@@ -7323,7 +7323,7 @@ body {
   font-weight: 400;
   margin: 0 2.5%;
   float: left;
-  width: 35%;
+  width: 65%;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item .search-product-item-inner .product-info .product-price {
   font-size: 24px;
@@ -7338,6 +7338,12 @@ body {
   float: left;
   width: 75%;
   margin: 10px 2.5%;
+}
+.search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item .search-product-item-inner .product-info .product-details {
+  width: 70%;
+  float: left;
+  margin-left: 5%;
+  overflow: hidden;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item .search-product-item-inner .product-expand {
   display: block;
@@ -7357,7 +7363,7 @@ body {
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item .search-product-item-inner .product-expand .product-expand-inner {
   padding: 10px 0;
-  background: #e9eae5;
+  background: #d1d3c9;
   position: relative;
   overflow: hidden;
   display: block;
@@ -7378,8 +7384,8 @@ body {
   padding: 5px;
   display: inline;
 }
-.search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item.active .search-product-item-inner .product-info .product-selected-icon {
-  display: block;
+.search-sc .search-main-sc .search-product-sc .search-product-inner .search-product-item.active {
+  background: #e9eae5;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item {
   overflow: hidden;
@@ -7415,7 +7421,7 @@ body {
   color: #84cff2;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item .search-product-item-inner .product-info .product-image {
-  width: 20%;
+  width: 25%;
   float: left;
   vertical-align: middle;
   text-align: center;
@@ -7432,7 +7438,7 @@ body {
   font-weight: 400;
   margin: 0 2.5%;
   float: left;
-  width: 35%;
+  width: 65%;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item .search-product-item-inner .product-info .product-price {
   font-size: 24px;
@@ -7447,6 +7453,12 @@ body {
   float: left;
   width: 75%;
   margin: 10px 2.5%;
+}
+.search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item .search-product-item-inner .product-info .product-details {
+  width: 70%;
+  float: left;
+  margin-left: 5%;
+  overflow: hidden;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item .search-product-item-inner .product-expand {
   display: block;
@@ -7466,7 +7478,7 @@ body {
 }
 .search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item .search-product-item-inner .product-expand .product-expand-inner {
   padding: 10px 0;
-  background: #e9eae5;
+  background: #d1d3c9;
   position: relative;
   overflow: hidden;
   display: block;
@@ -7487,8 +7499,8 @@ body {
   padding: 5px;
   display: inline;
 }
-.search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item.active .search-product-item-inner .product-info .product-selected-icon {
-  display: block;
+.search-sc .search-main-sc .search-product-sc .search-product-inner .search-store-item.active {
+  background: #e9eae5;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-expanded {
   display: none;
@@ -7738,6 +7750,7 @@ body {
   position: relative;
   border-right: 2px solid #84cff2;
   cursor: pointer;
+  text-align: center;
 }
 .search-sc .search-main-sc .search-product-sc .search-product-menu .search-product-menu-item:hover {
   color: white;
@@ -7863,10 +7876,10 @@ body {
   background: #1a1a1a;
 }
 .search-map-sc {
-  width: 80%;
+  width: 75%;
   overflow: hidden;
   position: absolute;
-  left: 20%;
+  left: 25%;
   top: 0;
   height: 100%;
 }
@@ -8373,9 +8386,10 @@ body {
 .product-map-sc {
   float: left;
   position: relative;
+  width: 75%;
   overflow: hidden;
   position: absolute;
-  left: 20%;
+  left: 25%;
   top: 0;
   height: 100%;
   width: 80%;

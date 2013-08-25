@@ -6,13 +6,11 @@
                 <div class="product-image">
                     <img src="{{picture}}" alt="{{name}} image">
                 </div>
-                <div class="product-name js-search-product-item-name">{{name}}</div>
-                <div class="product-price"><i class="icon-inr"></i> {{price}}</div>
-                <div class="product-selected-icon">
-                    <i class="icon-circle"></i>
+                <div class="product-details">
+                    <div class="product-name js-search-product-item-name">{{name}}</div>
+                    <div class="product-price"><i class="icon-inr"></i> {{price}}</div>
+                    <div class="product-brand">{{brand}}</div>
                 </div>
-
-                <div class="product-brand">{{brand}}</div>
             </div>
             <div class="product-expand js-product-expand-container">
                 <a href="/product.html">
