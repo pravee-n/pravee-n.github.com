@@ -25,9 +25,17 @@ var searchController = ( function(){
      * @type {Object}
      */
     var messages = {
-        mapLoad : 'Map Loaded',
-        bindEvent : 'Binding DOM events of filters',
-        filterInitialize : 'initalizing filters'
+        mapLoad             : 'Map Loaded',
+        bindEvent           : 'Binding DOM events of filters',
+        filterInitialize    : 'initalizing filters',
+        productInitialize   : 'initialized product handler',
+        renderProducts      : 'render the products',
+        loadExpanded        : 'loading expanded product container',
+        renderExpanded      : 'rendering the expanded products list',
+        noHtml              : 'did not receive HTML to render',
+        switchedProductView : 'swithing product view',
+        showShortlist       : 'loading shortlisted items',
+        shortlistQueued     : 'shotlist template not loaded, queued request'
     };
 
     /**
@@ -46,7 +54,6 @@ var searchController = ( function(){
         shortlistTemplate : 'scripts/templates/shortlistList.template'
     };
 
-
     var dom = {
         filterItem                 : '.js-filter-item',
         filterDropdownList         : '.js-filter-item-dropdown',
@@ -59,6 +66,12 @@ var searchController = ( function(){
         shortlistProductsContainer : '.js-product-list-shortlisted',
         collapsedProductsContainer : '.js-product-list-collapsed',
         expandedProductsContainer  : '.js-product-list-expanded',
+        shortlistListItem          : '.js-shortlist-list-item',
+        productsContainer          : '.js-products-container',
+        productMenuContainer       : '.js-product-menu-container',
+        expandButton               : '.js-product-block-expand',
+        mapContainer               : '.js-map-container',
+        productMenuCount           : '.js-product-value'
     };
 
     /**
@@ -92,7 +105,7 @@ var searchController = ( function(){
      * @param  {Object} data Data containing the pointers
      */
     function renderMap( data ) {
-        log( data );
+        NProgress.done();
         fillMapController = new FillMap( mapInstance, data );
     }
 
@@ -101,6 +114,7 @@ var searchController = ( function(){
      * for the user.
      */
     function getData() {
+        NProgress.start();
         mainData.getStores( renderMap );
         mainData.getProducts( initializeProductHandler );
     }
@@ -111,10 +125,13 @@ var searchController = ( function(){
      * @param  {Object} data Contains the list of products
      */
     function initializeProductHandler( data ) {
-        log( 'initialize product handler module' );
+        log( messages.productInitialize );
+        YNotification.show( 'Loading Products' );
         productHandler = new YProducts();
         var renderData = {};
         renderData.products = data;
+        var productCount = data.length;
+        $( dom.productMenuCount ).text( productCount );
         productHandler.getHtml( renderData, renderProducts );
         loadExpandedProducts( data );
     }
@@ -124,8 +141,10 @@ var searchController = ( function(){
      * @param  {String} html contains the html of all the product item blocks.
      */
     function renderProducts( html ) {
-        log( 'render the products and bind various, events' );
-        $( '.search-product-inner' ).html( html );
+        log( messages.renderProducts );
+        YNotification.end( 'Loading Products' );
+        $( dom.collapsedProductsContainer ).html( html );
+        productHandler.activate();
     }
 
     /**
@@ -133,7 +152,7 @@ var searchController = ( function(){
      * @param  {Object} data  data for the expanded products
      */
     function loadExpandedProducts( data ) {
-        log( 'loading expanded product handler' );
+        log( messages.loadExpanded );
         var renderData = {};
         renderData.products = data;
         productHandler.getExpandedHtml( renderData, renderExpandedProducts );
@@ -144,42 +163,44 @@ var searchController = ( function(){
      * @param  {String} html html of the expanded list
      */
     function renderExpandedProducts( html ) {
-        log( 'rendering the html for expanded list' );
+        log( messages.renderExpanded );
         if ( html ) {
-            $( '.js-product-list-expanded' ).html( html );
+            $( dom.expandedProductsContainer ).html( html );
+            bindEvents();
         } else {
-            log( 'did not receive html to render' );
+            log( messages.noHtml );
         }
-        productHandler.activate();
     }
 
     /**
      * Toggle product list between collapsd and expanded
      */
     function toggleProductList() {
-        $( '.js-products-container' ).toggleClass( 'search-product-expanded' );
-        $( '.js-product-list-collapsed' ).parent().toggle();
-        $( '.js-product-list-expanded' ).toggle();
-        $( '.js-product-menu-container' ).toggle();
+        log( messages.switchedProductView );
+        $( dom.productsContainer ).toggleClass( 'search-product-expanded' );
+        $( dom.collapsedProductsContainer ).parent().toggle();
+        $( dom.expandedProductsContainer ).toggle();
+        $( dom.productMenuContainer ).toggle();
     }
 
     /**
      * Bind various DOM events
      */
     function bindEvents() {
-        $( '.js-product-block-expand' ).on( 'click', function() {
+        $( dom.expandButton ).on( 'click', function() {
             $( this ).toggleClass( 'open' );
+            YAnalytics.track('switched product list view' );
             toggleProductList();
         });
 
         $( 'body' ).on( 'setActiveProduct', function() {
-            var isExpanded = $( '.js-products-container' ).hasClass( 'search-product-expanded' );
+            var isExpanded = $( dom.productsContainer ).hasClass( 'search-product-expanded' );
             if ( isExpanded ) {
                 toggleProductList();
             }
         });
 
-        $( '.js-product-list-expanded, .js-product-list-collapsed' ).slimScroll({
+        $( dom.collapsedProductsContainer + ', ' +  dom.expandedProductsContainer).slimScroll({
             height: 'auto'
         });
 
@@ -191,41 +212,25 @@ var searchController = ( function(){
             showProducts();
         });
 
-        $( 'body' ).bind( 'YFilterReady', function() {
+        $( dom.shortlistProductsContainer ).on( 'click', dom.shortlistListItem, function() {
+            var id = $( this ).attr( "data-id" );
+            fillMapController.activateMarker( id );
+        });
 
-            var html = filterHandler.getHtml();
-
-            $( dom.filterContainer ).prepend( html );
-            filterHandler.activate();
-
-            $( 'input' ).iCheck({
-                checkboxClass: 'icheckbox_flat-red',
-                radioClass: 'iradio_flat-red'
-            });
-
-            $( dom.filterContainer ).slideDown( 'slow' );
-
-            // $( '.more-filter-item-list' ).on( "click", function() {
-            //     var html = $( this ).find( '.more-filter-item-options' ).html();
-            //     $( '.more-filter-option-container-inner' ).html( html );
-            // });
-
-            $( dom.filterItem ).on( 'mouseenter', function() {
+        $( dom.filterItem ).hoverIntent(function( evt ) {
+            if (evt.type === 'mouseenter') {
                 $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
                 $( this ).addClass( 'selected' );
                 $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
-            });
-
-            $( dom.filterItem ).on( 'mouseleave', function() {
-                $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-                $( this ).removeClass( 'selected' );
-                $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
-            });
-
-            $( dom.filterDropdownList ).on( 'click', function( event ) {
-                event.stopPropagation();
-            });
+            }
         });
+
+        $( dom.filterItem ).on( 'mouseleave', function() {
+            $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).removeClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
+        });
+
     }
 
     /**
@@ -250,15 +255,21 @@ var searchController = ( function(){
      * show the shortlisted items list
      */
     function showShortlist() {
+        YAnalytics.track( 'viewed shortlist' );
+        log( messages.showShortlist );
         var shortlistedItems = YShortlist.getList();
         if( isShortlistCompiled ) {
             var html = shortlistTemplate( shortlistedItems );
-            $( dom.shortlistProductsContainer ).html( html );
+            if( shortlistedItems.length > 0 ) {
+                $( dom.shortlistProductsContainer ).html( html );
+            }
             $( dom.productMenuAll ).removeClass( 'selected' );
             $( dom.productMenuShortlist ).addClass( 'selected' );
             $( dom.collapsedProductsContainer ).hide();
             $( dom.shortlistProductsContainer ).show();
+            fillMapController.showShortlist();
         } else {
+            log( messages.shortlistQueued );
             shortlistRenderQueue = true;
         }
     }
@@ -271,6 +282,7 @@ var searchController = ( function(){
         $( dom.productMenuShortlist ).removeClass( 'selected' );
         $( dom.collapsedProductsContainer ).show();
         $( dom.shortlistProductsContainer ).hide();
+        fillMapController.showProducts();
     }
 
     /**
@@ -278,10 +290,17 @@ var searchController = ( function(){
      */
     function init() {
         initializeMap();
+        NProgress.configure({ appendContainer: dom.mapContainer });
         log( messages.filterInitialize );
+        YAnalytics.track( 'viewed Search' );
         filterHandler = new YFilter( settings.filterDataUrl );
+        $( 'body' ).bind( 'YFilterReady', function() {
+            var html = filterHandler.getHtml();
+            $( dom.filterContainer ).prepend( html );
+            filterHandler.activate();
+        });
+
         preloadTemplate();
-        bindEvents();
     }
 
     return {
@@ -292,5 +311,8 @@ var searchController = ( function(){
 
 
 $( document ).ready( function() {
+    analytics.ready(function () {
+        analytics.pageview();
+    });
     google.maps.event.addDomListener( window, 'load', searchController.init );
 });

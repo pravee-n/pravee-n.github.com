@@ -22,6 +22,7 @@
     </head>
     <body>
 
+    <!-- HEADER STARTS -->
     <div class="search-header lnd-header">
         <div class="lnd-logo-container">
             <i class="icon-rocket icon"></i>
@@ -29,6 +30,7 @@
             <span class="item2">Y</span>
             <span class="item3">S</span>
         </div>
+        <!-- header search container starts -->
         <div class="main-search-container js-global-search-container">
             <div class="search-input">
                 <input type="text" class="main-search-input js-main-search-input" value="Dummy search text">
@@ -56,13 +58,14 @@
             <div class="search-input-icon">
                 <i class="icon-search icon"></i>
             </div>
-
             <div class="clearfix"></div>
         </div>
-            <div class="clearfix"></div>
+        <!-- header search container -->
+        <div class="clearfix"></div>
     </div>
+    <!-- HEADER ENDS -->
 
-
+    <!-- MAIN CONTAINER STARTS -->
     <div class="search-sc">
         <div class="search-sc-inner">
             <div class="search-filter-sc">
@@ -109,6 +112,7 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+
             <!-- MAIN CONTAINER STARTS -->
             <div class="search-main-sc">
 
@@ -124,7 +128,7 @@
                             <div class="menu-item-title">
                                 Products
                             </div>
-                            <div class="menu-item-count"></div>
+                            <div class="menu-item-count js-product-value"></div>
                             <div class="menu-item-arrow-container arrow_box"></div>
                         </div>
                         <div class="search-product-menu-item item-last js-product-menu-item-shortlist">
@@ -154,15 +158,19 @@
                     <div class="search-product-list-sc">
                         <!-- shortlist container starts -->
                         <div class="search-product-shortlist-items js-product-list-shortlisted">
-                            <i class="icon-circle"></i>
-                            <div class="text">You don't have any shortlisted items</div>
+                            <div class="search-product-shortlist-empty-container">
+                                <i class="icon-circle-blank icon-spin"></i>
+                                <div class="text">You don't have any shortlisted items</div>
+                            </div>
                         </div>
                         <!-- shortlist container ends -->
 
                         <!-- collased items container starts -->
                         <div class="search-product-inner js-product-list-collapsed">
-                            <i class="icon-spinner icon-spin"></i>
-                            <div class="text"> Loading Products </div>
+                            <div class="search-product-loading">
+                                <i class="icon-spinner icon-spin"></i>
+                                <div class="text"> Loading Products </div>
+                            </div>
                         </div>
                         <!-- collased items container ends-->
 
@@ -173,12 +181,15 @@
                         </div>
                         <!-- expanded items container ends -->
                     </div>
-
                 </div>
                 <!-- SIDEBAR CONTAINER ENDS -->
 
                 <!-- MAP CONTAINER ENDS -->
                 <div class="search-map-sc js-map-container">
+                    <div class="y-notification js-y-notification">
+                        <div class="icon js-y-notification-icon"></div>
+                        <div class="text js-y-notification-text"></div>
+                    </div>
                     <div class="search-info-sc js-store-info-main">
                     </div>
                     <div class="map-control-bar js-control-bar-container">
@@ -197,9 +208,10 @@
             <div class="clearfix"></div>
         </div>
     </div>
+    <!-- MAIN CONTAINER ENDS -->
     <div class="clearfix"></div>
 
-
+    <!-- FOOTER STARTS -->
     <div class="lnd-footer">
         <div class="lnd-footer-inner">
             <div class="lnd-footer-list">
@@ -221,6 +233,7 @@
             </div>
         </div>
     </div>
+    <!-- FOONTER ENDS -->
 
     <div class="clearfix"></div>
 
@@ -235,16 +248,24 @@
         <script src="bower_components/bootstrap/js/bootstrap-tooltip.js"></script>
         <script src="bower_components/bootstrap/js/bootstrap-popover.js"></script>
         <script src="bower_components/nouislider/jquery.nouislider.js"></script>
+        <script src="bower_components/jquery-hoverIntent/jquery.hoverIntent.js"></script>
+        <script src="scripts/md5.js"></script>
+        <script src="scripts/jquery.nivo.slider.js"></script>
         <script src="scripts/jquery.icheck.js"></script>
         <script src="scripts/jquery-scrollto.js"></script>
         <script src="scripts/infobubble.js"></script>
+        <script src="scripts/analytics.js"></script>
         <script src="scripts/markerclusterer.js"></script>
         <script src="scripts/fontawesome-markers.js"></script>
         <script src="scripts/bows.js"></script>
+        <script src="scripts/nprogress.js"></script>
         <!-- endbuild -->
 
+
         <!-- build:js scripts/base.js -->
+        <script src="scripts/eysAnalytics.js"></script>
         <script src="scripts/data.js"></script>
+        <script src="scripts/stores.js"></script>
         <script src="scripts/filters.js"></script>
         <script src="scripts/products.js"></script>
         <script src="scripts/modules.js"></script>

@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="product-expand js-product-expand-container">
-                <a href="/product.html">
+                <a href="product.html">
                     <div class="product-expand-inner">
                         <div class="product-expand-message">View Product Details</div>
                         <i class="icon-chevron-right"></i>

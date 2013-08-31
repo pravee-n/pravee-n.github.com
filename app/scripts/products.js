@@ -1,3 +1,11 @@
+/**
+ * CONSTRUCTOR
+ *
+ * Responsible for populating the list in the sidebar.
+ *
+ *
+ */
+
 var YProducts = function() {
 
     var compiledTemplate,
@@ -83,10 +91,12 @@ var YProducts = function() {
             $( matchedElement ).find( dom.infoContainer ).siblings( dom.expandContainer ).slideToggle( 'fast' );
         });
 
-        $( dom.filterItem ).on( 'mouseenter', function() {
-            $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-            $( this ).addClass( 'selected' );
-            $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+        $( dom.filterItem ).hoverIntent(function( evt ) {
+            if (evt.type === 'mouseenter') {
+                $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+                $( this ).addClass( 'selected' );
+                $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+            }
         });
 
         $( dom.filterItem ).on( 'mouseleave', function() {

@@ -18,6 +18,15 @@ var YFilter = function( url ) {
     var log = bows( 'filter' );
     var self = this;
 
+    var dom = {
+        filterItem                 : '.js-filter-item',
+        filterDropdownList         : '.js-filter-item-dropdown',
+        filterDropdownMoreList     : '.js-more-filter-item-dropdown',
+        filterDropdownIcon         : '.js-filter-item-dropdown-icon',
+        filterStatus               : '.js-filter-item-status',
+        filterContainer            : '.js-search-filter-item-container',
+    };
+
     /**
      * settings object
      * @type {Object}
@@ -140,13 +149,11 @@ var YFilter = function( url ) {
         generateFilterBar();
     }
 
-
     function generateSliders(){
         $( '.js-filter-slider' ).each( function() {
             var start = $( this ).find( '.js-slider-start').text();
             var end   = $( this ).find( '.js-slider-end').text();
             var step  = $( this ).find( '.js-slider-step').text();
-            console.log( start + end + step );
             start = parseInt( start, 10 );
             end   = parseInt( end, 10 );
             step  = parseInt( step, 10 );
@@ -164,7 +171,6 @@ var YFilter = function( url ) {
         });
     }
 
-
     /**
      * PUBLIC
      *
@@ -175,13 +181,45 @@ var YFilter = function( url ) {
         return generatedHtml;
     }
 
+
+    /**
+     * PUBLIC
+     *
+     * Bind various events corresponding to filters after they are inserted.
+     */
     function activate() {
         log( 'activating filters' );
+        $( 'input' ).iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+        });
+
+        $( dom.filterContainer ).slideDown( 'slow' );
+
+        $( dom.filterItem ).hoverIntent(function( evt ) {
+            if (evt.type === 'mouseenter') {
+                $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+                $( this ).addClass( 'selected' );
+                $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+            }
+        });
+
+        $( dom.filterItem ).on( 'mouseleave', function() {
+            $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).removeClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
+        });
+
+        $( dom.filterDropdownList ).on( 'click', function( event ) {
+            event.stopPropagation();
+        });
+
         generateSliders();
     }
 
-
-
+    /**
+     * initialization function
+     */
     (function init() {
         if ( url ) {
             settings.url = url;

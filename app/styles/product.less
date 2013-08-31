@@ -34,7 +34,7 @@
             opacity: 1;
             background: @ivory;
             .product-store-menu-item {
-                width: 17.5%;
+                width: 22.5%;
                 overflow: hidden;
                 float: left;
                 display: block;
@@ -289,26 +289,24 @@
     z-index: 999999;
     left: 0;
     display: none;
-    top: 48px;
-    bottom: 40px;
+    top: 0px;
+    bottom: 0px;
 }
 
 .product-details-sc {
     .animated;
-    .fadeInUp;
+    .fadeInRight;
     overflow: hidden;
     position: fixed;
     display: none;
-    width: 75%;
-    left: 12.25%;
-    bottom: 39px;
-    height: 80%;
+    width: 40%;
+    right: 0;
+    top: 0;
+    height: 100%;
     z-index: 9999999;
     background: white;
     border: 1px solid @black-20;
-    box-shadow: 1px 0px 5px @black-80;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    box-shadow: 1px -2px 5px @black-80;
     .product-details-inner {
         overflow: hidden;
         padding: 0px 10px;
@@ -346,20 +344,89 @@
             position: relative;
             width: 100%;
             .product-details-image-sc {
-                float: left;
-                width: 40%;
+                width: 90%;
+                margin: 0 auto;
                 overflow: hidden;
                 text-align: center;
-                img {
-                    display: inline;
+                height: 350px;
+                position: relative;
+                .dots {
+                    position: relative;
                     width: 100%;
+                    -webkit-padding-start: 0px;
+                    li {
+                        display: inline-block;
+                        width: 5px;
+                        height: 5px;
+                        margin: 0 4px;
+                        text-indent: -999em;
+                        border: 2px solid @black-60;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        -webkit-transition: background .5s, opacity .5s;
+                        -moz-transition: background .5s, opacity .5s;
+                        transition: background .5s, opacity .5s;
+                        &.active {
+                            background: @brand-primary;
+                            border-color: @brand-primary;
+                        }
+                    }
+                }
+                .arrows {
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    top: 33%;
+                    color: white;
+                    font-size: 2em;
+                    .prev {
+                        position: relative;
+                        float: left;
+                        width: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                        vertical-align: middle;
+                        text-align: center;
+                        border-radius: 50%;
+                        border: 3px solid white;
+                        margin-left: 10px;
+                        cursor: pointer;
+                        opacity: 0.5;
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
+                    .next {
+                        .prev;
+                        float: right;
+                        margin-right: 10px;
+                    }
+                }
+
+                .product-image-slider {
+                    width: 100%;
+                    height: 300px;
+                    position: relative;
+                    overflow: auto;
+                    display: block;
+                    li {
+                        list-style: none;
+                    }
+                    ul {
+                        height: 300px;
+                        -webkit-padding-start: 0px;
+                        li {
+                            height: 300px;
+                            float: left;
+                        }
+                    }
                 }
             }
             .product-details-info-sc {
                 overflow: hidden;
                 position: relative;
                 float: left;
-                width: 50%;
+                width: 90%;
                 padding: 0 5%;
                 .product-name {
                     .beta;
@@ -455,7 +522,7 @@
 .product-map-sc {
     .search-map-sc;
     width: 80%;
-    float: none;
+    left: 20%;
     margin: 0 auto;
     .product-map-container {
         width: 100%;

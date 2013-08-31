@@ -1,5 +1,5 @@
 {{#each this}}
-    <div class="shortlist-list-item">
+    <div class="shortlist-list-item js-shortlist-list-item" data-id="{{YId}}">
         <div class="shortlist-list-item-inner">
             <div class="shortlist-list-item-name">
                 {{YName}}

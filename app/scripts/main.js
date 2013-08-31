@@ -298,6 +298,7 @@ var landingController = ( function(){
 })();
 
 $( document ).ready( function() {
+    analytics.pageview();
     google.maps.event.addDomListener( window, 'load', landingController.init() );
 });
 

@@ -38,15 +38,16 @@ var FillMap = function( map, data ) {
      * @type {Object}
      */
     var messages = {
-        initialized      : 'New Fill Map instance initialized',
-        noMap            : 'Map instance not provided',
-        noData           : 'Data not provided, or does not contain the required parameters',
-        foundData        : 'Received and set data',
-        generatedCluster : 'generated cluster for the given points',
-        noStores         : 'stores parameter not found in the provided data',
-        showStoreInfo    : 'show store info handler called',
+        initialized       : 'New Fill Map instance initialized',
+        noMap             : 'Map instance not provided',
+        noData            : 'Data not provided, or does not contain the required parameters',
+        foundData         : 'Received and set data',
+        generatedCluster  : 'generated cluster for the given points',
+        noStores          : 'stores parameter not found in the provided data',
+        showStoreInfo     : 'show store info handler called',
         clustersRequested : 'Generate clusters called',
-        generatingCircle : 'Generating the user location circle'
+        generatingCircle  : 'Generating the user location circle',
+        showShortlist     : 'Showing shortlisted products on the map'
     };
 
     /**
@@ -187,38 +188,46 @@ var FillMap = function( map, data ) {
      */
     function initializeMapMenu() {
         $( mapDom.mapMenu.zoomIn ).on( 'click', function() {
-            // TODO : Need to add this to messages
-            log( 'zoom called' );
             currentZoom = mapInstance.getZoom();
             mapInstance.setZoom( currentZoom + 1 );
             currentZoom++;
         });
 
         $( mapDom.mapMenu.zoomOut ).on( 'click', function() {
-            // TODO : Need to add this to messages
-            log( 'zoom out called' );
             currentZoom = mapInstance.getZoom();
             mapInstance.setZoom( currentZoom - 1 );
             currentZoom--;
         });
 
         $( mapDom.mapMenu.shortlist ).on( 'click', function() {
-            log( 'showing shortlisted products' );
             showShortlist();
         });
     }
 
     /**
-     * Fetch and show shortlisted items
+     * PUBLIC
+     *
+     * Fetch and show shortlisted items on the map
      */
     function showShortlist() {
         clearMarkers();
+        log( messages.showShortlist );
         var shorlistedMarkers = YShortlist.getList();
         for( var index in shorlistedMarkers ){
             var marker = shorlistedMarkers[ index ];
             log( marker.shortlistProductName );
             marker.setMap( mapInstance );
         }
+    }
+
+    /**
+     * PUBLIC
+     *
+     * Show the current stores
+     */
+    function showProducts() {
+        clearMarkers();
+        printMarkers();
     }
 
     /**
@@ -252,6 +261,7 @@ var FillMap = function( map, data ) {
                 marker.setMap( null );
             }
         }
+        YNotification.end( 'Loading Data ...' );
     }
 
     /**
@@ -498,6 +508,25 @@ var FillMap = function( map, data ) {
     }
 
     /**
+     * PUBLIC
+     *
+     * Activate a given Marker
+     *
+     * @param  {String} id Store ID
+     */
+    function activateMarker( id ) {
+        for( var item in currentMarkers ) {
+            var marker = currentMarkers[ item ];
+            if( marker.YId == id ) {
+                google.maps.event.trigger( marker, 'click' );
+                break;
+            } else {
+                log( 'could not activate the marker' );
+            }
+        }
+    }
+
+    /**
      * shows store info on the info container and pans the map to accomodate the info box
      * @param  {Object} event Google maps click event
      */
@@ -518,14 +547,7 @@ var FillMap = function( map, data ) {
         var newPan = userLeft + 0.2 * mapDistance ;
         var newMapPosition = new google.maps.LatLng( userTop ,newPan );
 
-        // Reset the previous marker to its default state
-        if ( currentActiveMarker && currentActiveMarker.YDefaultColor ) {
-            currentActiveMarker.icon.strokeColor = currentActiveMarker.YDefaultColor;
-            currentActiveMarker.icon.fillColor = currentActiveMarker.YDefaultColor;
-            currentActiveMarker.icon.scale = 0.012;
-            currentActiveMarker.icon.stroke = 1;
-            currentActiveMarker.setIcon( currentActiveMarker.icon );
-        }
+        deactivateMarker();
 
         // Change the state of the currently selected marker
         currentActiveMarker = pointer;
@@ -538,7 +560,26 @@ var FillMap = function( map, data ) {
 
         infoBoxHandler.update( pointer, userPosition );
 
-        // mapInstance.panTo( newMapPosition );
+        mapInstance.panTo( newMapPosition );
+    }
+
+    /**
+     * PUBLIC
+     *
+     * Activate the currently seclected marker
+     *
+     */
+    function deactivateMarker() {
+
+        infoBoxHandler.deactivate();
+        // Reset the previous marker to its default state
+        if ( currentActiveMarker && currentActiveMarker.YDefaultColor ) {
+            currentActiveMarker.icon.strokeColor = currentActiveMarker.YDefaultColor;
+            currentActiveMarker.icon.fillColor = currentActiveMarker.YDefaultColor;
+            currentActiveMarker.icon.scale = 0.012;
+            currentActiveMarker.icon.stroke = 1;
+            currentActiveMarker.setIcon( currentActiveMarker.icon );
+        }
     }
 
     /**
@@ -740,6 +781,7 @@ var FillMap = function( map, data ) {
         log( messages.initialized );
         if ( map ) {
             if ( data ) {
+                YNotification.show( 'Loading Data ...' );
                 mapInstance = map;
                 infoBoxHandler = new infoContainerHandler( mapInstance );
                 geolocationHandler = new locationModule();
@@ -757,4 +799,10 @@ var FillMap = function( map, data ) {
 
         bindDomEvents();
     })();
+
+    return {
+        showShortlist: showShortlist,
+        showProducts : showProducts,
+        activateMarker : activateMarker
+    };
 };

@@ -6,11 +6,9 @@ var EYS = (function() {
     var log = bows( 'EYS' );
 
     function setCurrentLocation( lattitude, longitude ) {
-
     }
 
     function getCurrentLocation(){
-
     }
 
     function setActiveProduct( id ){
@@ -33,15 +31,12 @@ var EYS = (function() {
             log( "current product not set " );
             return false;
         }
-
     }
 
     function setActiveStore(){
-
     }
 
     function getActiveStore(){
-
     }
 
     return {
@@ -52,8 +47,6 @@ var EYS = (function() {
         setActiveStore     : setActiveStore,
         getActiveStore     : setActiveStore
     };
-
-
 })();
 
 
@@ -116,7 +109,7 @@ var YShortlist = (function() {
         var id = pointer.YId;
         for( var index in shortlistedItems ) {
             var pointer = shortlistedItems[ index ];
-            if( pointer.YId === id ) {
+            if ( pointer.YId === id ) {
                 shortlistedItems.splice( index, 1 );
                 pointer.isShortlist = false;
                 count--;
@@ -202,7 +195,6 @@ var infoContainerHandler = function( map ) {
 
     var log = bows( 'infoContainerHandler' );
 
-
     /**
      * update info box with current store marker details
      * @param  {Google Maps Marker} pointer      store marker pointer
@@ -224,6 +216,18 @@ var infoContainerHandler = function( map ) {
         } else {
             log( messages.noUpdate );
         }
+    }
+
+
+    /**
+     * PUBLIC
+     *
+     * Hide the info window
+     *
+     * @return {[type]} [description]
+     */
+    function deactivate(){
+        $( dom.mainContainer ).slideUp( 'fast' );
     }
 
 
@@ -348,10 +352,10 @@ var infoContainerHandler = function( map ) {
     }
 
     return {
-        update : update
+        update     : update,
+        deactivate : deactivate
     };
 };
-
 /**
  * ---------- END OF INFO CONTAINER MODULE ---------------
  */
@@ -453,7 +457,6 @@ var locationModule = function() {
         }
     }
 
-
     /**
      * update the current location of the user
      * @param  {Function} callback Function to callback when the request completes
@@ -476,6 +479,102 @@ var locationModule = function() {
 /**
  * ---------- END OF INFO LOCATION MODULE ---------------
  */
+
+
+/**
+ * Notification module.
+ * Binds to the even YNotify and shows notifcation in js-y-notifcation box.
+ */
+var YNotification = (function(){
+
+    var queuedMessage,
+        currentState;
+
+    var log = bows( 'YNotify' );
+
+    var dom = {
+        errorClass   : '.js-y-notification-error',
+        successClass : '.js-y-notification-success',
+        workingClass : '.js-y-notification-working',
+        container    : '.js-y-notification',
+        icon         : '.js-y-notification-icon',
+        text         : '.js-y-notification-text'
+    };
+
+    var messages = {
+        noEventData : 'Event fired but no data provided. ABORTING',
+        requested   : 'Requested notification',
+        noMsg       : 'Status set to true, but no message provided',
+        showMsg     : 'Showing message',
+        queuedMsg   : 'Already showing message. Queued the current message',
+        msgEnd      : 'Message came to an end',
+        hideMsg     : 'No more messages'
+    };
+
+    function showNotification( msg, notQueue ) {
+
+        if( !notQueue ) {
+            queuedMessage.push( msg );
+        }
+        log( queuedMessage );
+        log( currentState );
+        if( !currentState ) {
+            log( msg );
+            $( dom.text ).text( msg );
+            $( dom.container ).show();
+            currentState = 1;
+        } else {
+            log( messages.queuedMsg );
+        }
+    }
+
+
+    function hideNotification( msg ) {
+        log( messages.msgEnd + msg );
+        for( var item in queuedMessage ) {
+            var checkMsg = queuedMessage[ item ];
+            if( msg === checkMsg ) {
+                queuedMessage.splice( item, 1 );
+                break;
+            }
+        }
+        if( checkQueue() ) {
+            currentState = 0;
+            log( messages.hideMsg );
+            $( dom.text ).text( '' );
+            $( dom.container ).hide();
+        }
+    }
+
+    function checkQueue(){
+        log( 'check QUEUE : ' + queuedMessage );
+        var flag = 0;
+        for( var item in queuedMessage ){
+            var msg = queuedMessage[ item ];
+            showNotification( msg, true );
+            flag = 1;
+        }
+        return flag;
+    }
+
+
+    (function init(){
+        queuedMessage = [];
+        currentState = 0;
+        $( 'body' ).on( 'YNotify', function( event ) {
+            preCheck( event );
+        });
+    })();
+
+    return {
+        show : showNotification,
+        end    : hideNotification
+    };
+})();
+/**
+ * ---------- END OF NOTIFICATION MODULE ---------------
+ */
+
 
 $(document).ready(function(){
   $( 'input' ).iCheck({
