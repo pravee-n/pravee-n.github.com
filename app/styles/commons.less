@@ -269,7 +269,16 @@ a {
                         display: inline;
                     }
                     i {
-                        color: @brand-success;
+                        color: @yellow;
+                        &.status0 {
+                            color: @brand-success;
+                        }
+                        &.status1 {
+                            color: @brand-danger;
+                        }
+                        &.status2 {
+                            color: @yellow;
+                        }
                     }
                 }
             }
@@ -313,6 +322,9 @@ a {
                     color: white;
                     cursor: pointer;
                 }
+                &.selected {
+                    background: darken( @brand-primary, 20% );
+                }
             }
             .search-info-expand {
                 width: 31%;
@@ -331,6 +343,10 @@ a {
                 .expand-value {
                     display: inline;
                 }
+            }
+            .search-info-collapse {
+                .search-info-expand;
+                display: none;
             }
             .search-info-directions {
                 width: 31%;
@@ -456,8 +472,10 @@ a {
     padding: 10px 2%;
     width: 96%;
     margin: 0;
-    box-shadow: 1px 2px 3px @black-80;
-    // overflow: hidden;
+    background: @ivory;
+    height: 28px;
+    box-shadow: 1px 2px 3px @black-20;
+    z-index: 999;
     .lnd-logo-container {
         .delta;
         .sans;
@@ -640,7 +658,10 @@ a {
     width: 96%;
     overflow: hidden;
     bottom: 0;
-    border-top: 2px solid @black-50;
+    height: 20px;
+    box-shadow: 1px -2px 3px @black-20;
+    z-index: 999;
+    background: @ivory;
     .lnd-footer-inner {
         .delta;
         list-style: none;
@@ -662,12 +683,6 @@ a {
                 .opacity( 0.5 );
             }
         }
-    }
-    &.modLanding {
-        position: fixed;
-        top: 90%;
-        height: 10%;
-        border: none;
     }
 }
 // -------------------------------------

@@ -149,6 +149,10 @@ var YFilter = function( url ) {
         generateFilterBar();
     }
 
+    /**
+     * Generate the sliders for all the filters that require sliders.
+     * Can only be done after inserting the elements
+     */
     function generateSliders(){
         $( '.js-filter-slider' ).each( function() {
             var start = $( this ).find( '.js-slider-start').text();
@@ -197,17 +201,18 @@ var YFilter = function( url ) {
         $( dom.filterContainer ).slideDown( 'slow' );
 
         $( dom.filterItem ).hoverIntent(function( evt ) {
-            if (evt.type === 'mouseenter') {
+            if (evt.type === 'mouseleave') {
+                log( 'hoverintent leave called' );
                 $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-                $( this ).addClass( 'selected' );
-                $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+                $( this ).removeClass( 'selected' );
+                $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
             }
         });
 
-        $( dom.filterItem ).on( 'mouseleave', function() {
+        $( dom.filterItem ).on( 'mouseenter', function() {
             $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-            $( this ).removeClass( 'selected' );
-            $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).addClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
         });
 
         $( dom.filterDropdownList ).on( 'click', function( event ) {

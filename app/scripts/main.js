@@ -1,11 +1,15 @@
 var google = google || {};
 
-
-
-
 var landingController = ( function(){
 
-    var mapInstance, locationHandler, animationStep, infoBubble, marker, currentUserLocation, animationMarkers, animationBubbles;
+    var mapInstance,
+        locationHandler,
+        animationStep,
+        infoBubble,
+        marker,
+        currentUserLocation,
+        animationMarkers,
+        animationBubbles;
 
     var log = bows( 'landingController' );
 
@@ -19,6 +23,10 @@ var landingController = ( function(){
         stylers: [ { visibility: 'on' }, { saturation: -100 }, { gamma: 1.94 } ]
     }];
 
+    /**
+     * Example Data to be shown on the landing page
+     * @type {Array}
+     */
     var exampleData = [
         [
             {
@@ -132,10 +140,16 @@ var landingController = ( function(){
         log( messages.mapLoad );
     }
 
+    /**
+     * Get data of a single product object.
+     */
     function getData() {
         mainData.getProductObject( 1, initializeProductHandler );
     }
 
+    /**
+     * Start the animation of the page
+     */
     function startAnimation() {
         animationStep++;
         if ( animationStep === 6 ) {
@@ -146,10 +160,12 @@ var landingController = ( function(){
         $( '.lnd-rotate-item.item' + animationStep  ).addClass( 'active' );
 
         var currentStoresData = exampleData[ animationStep - 1 ];
+
         for( var item in animationMarkers ) {
             var marker = animationMarkers[ item ];
             marker.setMap( null );
         }
+
         for( var item in animationBubbles ) {
             var bubble = animationBubbles[ item ];
             bubble.close();
@@ -188,6 +204,11 @@ var landingController = ( function(){
         setTimeout( startAnimation, 5000);
     }
 
+
+    /**
+     * Get the settings for the home icon/bubble.
+     * @return {Object} InfoBubble Object
+     */
     function getInfoBubbleSettings() {
 
         return {
@@ -209,6 +230,11 @@ var landingController = ( function(){
         };
     }
 
+
+    /**
+     * Get settings for the infoBubbles used to show the stores on landing
+     * @return {Object} Infobubble settings
+     */
     function getLabelSettings() {
 
         return {
@@ -226,10 +252,16 @@ var landingController = ( function(){
             arrowPosition: 50,
             backgroundClassName: 'landing-home-bubble',
             arrowStyle: 0,
-            minWidth : 100
+            minWidth : 150,
+            minHeight : 'none'
         };
     }
 
+
+    /**
+     * Set the center of the map based on the Geolocation
+     * @param {Object} userLocation HTML5 GeoLocation Object
+     */
     function setMapCenter( userLocation ) {
         var location = new google.maps.LatLng( userLocation.coords.latitude, userLocation.coords.longitude );
         currentUserLocation = location;
@@ -259,10 +291,18 @@ var landingController = ( function(){
         startAnimation();
     }
 
+    /**
+     * Update the address on the page when the marker is dragged
+     * @param  {[type]} address Address
+     */
     function updateAddress( address ) {
         $( '.lnd-location-input' ).val( address );
     }
 
+    /**
+     * Update position when the user provides a location
+     * @param  {Object} location Location
+     */
     function updatePosition( location ) {
         mapInstance.panTo( location );
         infoBubble.close();
@@ -272,6 +312,9 @@ var landingController = ( function(){
         currentUserLocation = location;
     }
 
+    /**
+     * Bind various DOM events
+     */
     function bindEvents() {
         $( '.lnd-location-button' ).on( 'click', function() {
             var address = $( '.lnd-location-input' ).val();
@@ -295,7 +338,9 @@ var landingController = ( function(){
     return {
         init : init
     };
+
 })();
+
 
 $( document ).ready( function() {
     analytics.pageview();

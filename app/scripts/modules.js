@@ -162,10 +162,12 @@ var infoContainerHandler = function( map ) {
         priceValue          : '.js-store-price-value',
         shortlistAction     : '.js-store-shortlist-action',
         shortlistActionIcon : '.js-shortlist-action-icon',
+        shortlistStatus     : '.js-store-shortlist-status',
         rating              : '.js-store-rating',
         distance            : '.js-store-distance-container',
         distanceValue       : '.js-store-distance-value',
         storeExpand         : '.js-store-info-expand',
+        storeCollapse       : '.js-store-info-collapse',
         expandContainer     : '.js-store-expand-container',
         expandImage         : '.js-store-expand-image',
         expandName          : '.js-store-expand-name',
@@ -205,12 +207,14 @@ var infoContainerHandler = function( map ) {
             currentPointer = pointer;
             currentUserPosition = userPosition;
             currentStoreInfoObject = {
-                name        : pointer.YName,
-                address     : pointer.YAddress,
-                phone       : pointer.YPhone,
-                image       : pointer.YPicture,
-                price       : pointer.YPrice,
-                isShortlist : pointer.isShortlist
+                name          : pointer.YName,
+                address       : pointer.YAddress,
+                phone         : pointer.YPhone,
+                image         : pointer.YPicture,
+                price         : pointer.YPrice,
+                isShortlist   : pointer.isShortlist,
+                statusMessage : pointer.YMessage,
+                status        : pointer.YStatus
             };
             getDirections();
         } else {
@@ -227,6 +231,7 @@ var infoContainerHandler = function( map ) {
      * @return {[type]} [description]
      */
     function deactivate(){
+        clearCurrentDirections();
         $( dom.mainContainer ).slideUp( 'fast' );
     }
 
@@ -274,14 +279,24 @@ var infoContainerHandler = function( map ) {
                 YShortlist.add( currentPointer );
                 $( this ).addClass( 'selected' );
                 $( dom.shortlistActionIcon ).removeClass( 'icon-bookmark-empty' ).addClass( 'icon-bookmark' );
+                $( dom.shortlistStatus ).text( 'shortlisted' );
             } else {
                 YShortlist.remove( currentPointer );
                 $( this ).removeClass( 'selected' );
                 $( dom.shortlistActionIcon ).addClass( 'icon-bookmark-empty' ).removeClass( 'icon-bookmark' );
+                $( dom.shortlistStatus ).text( 'shortlist' );
             }
         });
 
         $( dom.storeExpand ).on( 'click', function() {
+            $( dom.storeExpand ).toggle();
+            $( dom.storeCollapse ).toggle();
+            $( dom.expandContainer ).slideToggle( 'fast' );
+        });
+
+        $( dom.storeCollapse ).on( 'click', function() {
+            $( dom.storeExpand ).toggle();
+            $( dom.storeCollapse ).toggle();
             $( dom.expandContainer ).slideToggle( 'fast' );
         });
 
@@ -335,7 +350,6 @@ var infoContainerHandler = function( map ) {
      * Show directions on the map
      */
     function renderDirections(){
-        $( dom.storeExpand ).click();
         clearCurrentDirections();
         directionsDisplay.setMap( mapInstance );
         directionsDisplay.setDirections( currentStoreInfoObject.directionResponse );

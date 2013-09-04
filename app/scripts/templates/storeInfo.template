@@ -7,8 +7,8 @@
         <div class="search-info-top-row1">
             <div class="search-info-store-title js-store-title">{{name}}</div>
             <div class="search-info-store-status js-store-info-status">
-                <i class="icon-circle"></i>
-                <div class="text js-store-info-text"> Available </div>
+                <i class="icon-circle status{{status}}" ></i>
+                <div class="text js-store-info-text"> {{statusMessage}} </div>
             </div>
         </div>
         <div class="search-info-top-row2">
@@ -31,12 +31,12 @@
         {{#if isShortlist}}
             <div class="search-info-shortlist js-store-shortlist-action selected">
                 <i class="icon-bookmark js-shortlist-action-icon"></i>
-                <span>Shortlisted</span>
+                <span class="js-store-shortlist-status">Shortlisted</span>
             </div>
         {{else}}
             <div class="search-info-shortlist js-store-shortlist-action">
                 <i class="icon-bookmark-empty js-shortlist-action-icon"></i>
-                <span>Shortlist</span>
+                <span class="js-store-shortlist-status">Shortlist</span>
             </div>
         {{/if}}
 
@@ -48,6 +48,11 @@
         <div class="search-info-expand js-store-info-expand">
             <span class="expand-value">Show Details</span>
             <i class="icon-chevron-down"></i>
+        </div>
+
+        <div class="search-info-collapse js-store-info-collapse">
+            <span class="expand-value">Hide Details</span>
+            <i class="icon-chevron-up"></i>
         </div>
     </div>
     <div class="search-info-expand-sc js-store-expand-container">

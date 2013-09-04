@@ -92,17 +92,18 @@ var YProducts = function() {
         });
 
         $( dom.filterItem ).hoverIntent(function( evt ) {
-            if (evt.type === 'mouseenter') {
+            if (evt.type === 'mouseleave') {
+                log( 'hoverintent leave called' );
                 $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-                $( this ).addClass( 'selected' );
-                $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
+                $( this ).removeClass( 'selected' );
+                $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
             }
         });
 
-        $( dom.filterItem ).on( 'mouseleave', function() {
+        $( dom.filterItem ).on( 'mouseenter', function() {
             $( dom.filterItem ).not(this).removeClass( 'selected' ).find( dom.filterDropdownList ).slideUp( 'fast' );
-            $( this ).removeClass( 'selected' );
-            $( this ).find( dom.filterDropdownList ).slideUp( 'fast' );
+            $( this ).addClass( 'selected' );
+            $( this ).find( dom.filterDropdownList ).slideDown( 'fast' );
         });
 
         $( dom.filterDropdownList ).on( 'click', function( event ) {

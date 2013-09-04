@@ -629,7 +629,7 @@ var FillMap = function( map, data ) {
 
         if( pointer ) {
             currentHoverBubble.setContent( getHoverBubbleContent( pointer ) );
-            currentHoverBubble.setBackgroundColor( pointer.icon.fillColor );
+            currentHoverBubble.setBackgroundColor( pointer.YColor );
             currentHoverBubble.open( mapInstance, pointer );
         } else {
             log( 'can not show hover bubble. Pointer not obtained' );
@@ -695,19 +695,22 @@ var FillMap = function( map, data ) {
                 if ( randomStatus === 0 ) {
                     currentMarkerSettings.icon.strokeColor = statusColors.available.color;
                     currentMarkerSettings.icon.fillColor = statusColors.available.color;
+                    currentMarkerSettings.YColor = statusColors.available.color;
                     currentMarkerSettings.YMessage = 'Available';
-
                 } else if ( randomStatus === 1 ) {
                     currentMarkerSettings.icon.fillColor = statusColors.notAvailable.color;
                     currentMarkerSettings.icon.strokeColor = statusColors.notAvailable.color;
+                    currentMarkerSettings.YColor = statusColors.notAvailable.color;
                     currentMarkerSettings.YMessage = 'Not Available';
                 } else if ( randomStatus === 2 ) {
                     currentMarkerSettings.icon.fillColor = statusColors.noInfo.color;
                     currentMarkerSettings.icon.strokeColor = statusColors.noInfo.color;
+                    currentMarkerSettings.YColor = statusColors.noInfo.color;
                     currentMarkerSettings.YMessage = 'Ending Soon';
                 } else {
                     currentMarkerSettings.icon.fillColor = statusColors.noInfo.color;
                     currentMarkerSettings.icon.strokeColor = statusColors.noInfo.color;
+                    currentMarkerSettings.YColor = statusColors.noInfo.color;
                     currentMarkerSettings.YMessage = 'No Information';
                 }
                 var marker = new google.maps.Marker( currentMarkerSettings );
