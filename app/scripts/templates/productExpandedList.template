@@ -1,6 +1,22 @@
 <div class="search-product-expanded-title">
-    <div class="title-text">
-        Select your product
+    <div class="search-product-expanded-tab-container">
+        <div class="search-product-expanded-tab-container-inner">
+            <div class="search-product-expanded-tab-item active">
+                <div class="tab-item-inner">
+                    <div class="tab-item-title">
+                        PRODUCTS
+                    </div>
+                </div>
+            </div>
+            <div class="search-product-expanded-tab-item">
+                <div class="tab-item-inner">
+                    <div class="tab-item-title">
+                        SHORTLIST
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
     <div class="sort-menu">
         <div class="sort-menu-label">Sort by</div>

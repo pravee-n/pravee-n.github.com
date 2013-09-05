@@ -134,50 +134,60 @@
                                 width: 397%;
                                 left: -301.9%;
                                 overflow: hidden;
-                            }
-                            .more-filter-label-container {
-                                width: 60%;
-                                overflow: hidden;
-                                float: left;
-                                .more-filter-item-list {
-                                    width: 45%;
-                                    margin: 10px 2.5%;
-                                    float: left;
-                                    background: @ivory;
-                                    &.selected {
-                                        background: @brand-primary;
-                                        color: white;
-                                    }
-                                    .more-filter-item-inner {
-                                        padding: 10px;
-                                        position: relative;
-                                        overflow: hidden;
-                                        .more-filter-item-name {
-                                            float: left;
-                                        }
-                                        i {
-                                            float: right;
-                                            color: @black-20;
-                                        }
-                                    }
-                                    .more-filter-item-options {
-                                        display: none;
-                                        overflow: hidden;
-                                        float: left;
-                                    }
-                                }
-
-                            }
-                            .more-filter-option-container {
-                                overflow: hidden;
-                                position: relative;
-                                float: left;
-                                width: 40%;
-                                height: 100%;
-                                .more-filter-option-container-inner {
-                                    padding: 0 10px;
-                                    border-left: 1px solid @black-20;
+                                max-height: 400px;
+                                .more-filter-item {
+                                    display: block;
+                                    margin-top: 10px;
                                     overflow: hidden;
+                                    position: relative;
+                                    float: left;
+                                    width: 96%;
+                                    padding: 2%;
+                                    .more-filter-item-name {
+                                        .delta;
+                                        font-weight: 700;
+                                        padding-bottom: 10px;
+                                        border-bottom: 1px solid @black-60;
+                                        width: 100%;
+                                    }
+                                    .box-filter-item {
+                                        .delta;
+                                        margin-bottom: 0;
+                                        float: left;
+                                        width: 30%;
+                                        margin: 10px 0.5%;
+                                        background: @ivory;
+                                        border-radius: 4px;
+                                        border: 1px solid darken( @ivory, 10% );
+                                        .box-filter-item-status {
+                                            .transition( all 0.5s ease-in-out );
+                                            display: block;
+                                            width: 0px;
+                                            float: left;
+                                            background: lighten( @brand-success, 15% );
+                                            color: @brand-success;
+                                            text-align: center;
+                                            padding: 8px 0;
+                                            opacity: 0;
+                                        }
+                                        .box-filter-item-name {
+                                            .transition( all 0.5s ease-in-out );
+                                            padding: 8px 25px;
+                                            text-align: center;
+                                        }
+                                        &.active {
+                                            background: darken( @ivory, 10% );
+                                            border: 1px solid darken( @ivory, 20% );
+                                            .box-filter-item-status {
+                                                width: 40px;
+                                                opacity: 1;
+                                                box-shadow: -1px 3px 5px inset;
+                                            }
+                                            .box-filter-item-name {
+                                                padding: 8px 0;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -381,11 +391,29 @@
                     display: block;
                     width: 96%;
                     padding: 10px 2%;
-                    .title-text {
-                        .gamma;
-                        margin-bottom: 0;
-                        width: 70%;
+                    .search-product-expanded-tab-container {
                         float: left;
+                        display: block;
+                        position: relative;
+                        padding: 10px 0;
+                        .search-product-expanded-tab-container-inner {
+                            width: 100%;
+                            position: relative;
+                            padding: 0 10px;
+                            .search-product-expanded-tab-item {
+                                font-size: 1.6em;
+                                font-weight: 700;
+                                margin-bottom: 0;
+                                display: block;
+                                float: left;
+                                margin-right: 40px;
+                                padding-bottom: 5px;
+                                &.active {
+                                    border-bottom: 2px solid @brand-primary;
+                                    color: @brand-primary;
+                                }
+                            }
+                        }
                     }
                     .sort-menu {
                         float: right;

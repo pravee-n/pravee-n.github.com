@@ -25,6 +25,8 @@ var YFilter = function( url ) {
         filterDropdownIcon         : '.js-filter-item-dropdown-icon',
         filterStatus               : '.js-filter-item-status',
         filterContainer            : '.js-search-filter-item-container',
+        boxFilterItem              : '.js-box-filter-item',
+        moreFilterDropdownInner    : '.js-more-filter-dropdown-inner'
     };
 
     /**
@@ -217,6 +219,14 @@ var YFilter = function( url ) {
 
         $( dom.filterDropdownList ).on( 'click', function( event ) {
             event.stopPropagation();
+        });
+
+        $( dom.boxFilterItem ).on( 'click', function(){
+            $( this ).toggleClass( 'active' );
+        });
+
+        $( dom.moreFilterDropdownInner ).slimScroll({
+            height: 'auto'
         });
 
         generateSliders();
