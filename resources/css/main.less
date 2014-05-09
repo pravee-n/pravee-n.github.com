@@ -24,7 +24,7 @@ html, body {
 	font-style: normal;
 }
 */
-@font-face {
+/*@font-face {
 	font-family: 'EntypoSocial';
 	src: url('fonts/entypo-social/entypo-social.eot');
 	src: url('fonts/entypo-social/entypo.eot?#iefix') format('embedded-opentype'),
@@ -34,10 +34,10 @@ html, body {
 	font-weight: normal;
 	font-style: normal;
 }
-
-.entypo-social {
+*/
+/*.entypo-social {
 	font-family: 'EntypoSocial';
-}
+}*/
 
 .home-content {
 	position: relative;
@@ -53,35 +53,43 @@ html, body {
 		.social-container {
 			overflow: hidden;
 			width:240px;
-			margin: 10px auto 0 auto;
+			margin: 20px auto 0 auto;
 			.social-icon {
 				text-decoration: none;
 				color: #212121;
 				float: left;
-				margin-right: 20px;
-				font-size: 8em;
+				margin: 5px 20px 0 0;
 				cursor: pointer;
-				&:hover {
-					color:#3c3c3c;
-				}
 			}
 			.social-icon-git {
-				margin: 16px 22px 0 0;
 				font-size: 4.5em;
+				margin-top: 0px;
+				&:hover {
+					color: #3c3c3c;
+				}
 			}
 
-			.mail-container {
-				margin-top: 19px;
-				float: left;
+			.social-icon-fb {
+				font-size: 2em;
+			}
+
+			.social-icon-tw {
+				font-size: 2em;
+			}
+
+			.social-icon-mail {
+				font-size: 1.6em;
+			}
+
+			.circle-container {
 				background-color: #212121;
-				height: 39px;
-				width: 39px;
+				height: 40px;
+				width: 40px;
 				border-radius: 50%;
 				color: white;
 				line-height: 40px;
 				text-align: center;
-				font-size: 15px;
-				&:hover{
+				&:hover {
 					background-color: #3c3c3c;
 				}
 			}
